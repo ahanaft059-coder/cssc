@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - CSSC (Collectorate School Science Club)</title>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('cssc_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <style>
+        :root {
+            --bg-color: #050811;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --accent-glow: rgba(16, 185, 129, 0.15);
+            --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 130px 20px 40px 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 14px 0;
+            box-shadow: var(--shadow);
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        .logo-badge {
+            background: var(--primary-grad);
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .logo-text h1 {
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+        .logo-text span {
+            font-size: 11px;
+            color: #34d399;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links li a:hover, .nav-links li a.active {
+            color: #34d399;
+        }
+
+        .admin-nav-btn {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399 !important;
+            border: 1px dashed #34d399;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 13px !important;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .admin-nav-btn:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
+
+        .theme-btn {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 9px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: transform 0.2s;
+        }
+        .theme-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .page-header h2 {
+            font-size: 32px;
+            margin: 0 0 8px 0;
+            background: var(--primary-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-header .school-subname {
+            font-size: 15px;
+            color: #34d399;
+            font-weight: 600;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        .search-input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 12px 16px 12px 45px;
+            border-radius: 14px;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .admin-panel-box {
+            display: none;
+            border: 2px dashed #34d399;
+            padding: 25px;
+            border-radius: 20px;
+            background: rgba(52, 211, 153, 0.03);
+            margin-bottom: 30px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr) auto;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        @media(max-width: 900px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .form-group label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .form-control {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            outline: none;
+        }
+        .btn-primary {
+            background: var(--primary-grad);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            height: 41px;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        @media(max-width: 900px) {
+            .members-grid { grid-template-columns: 1fr; }
+        }
+        .member-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: transform 0.2s;
+        }
+        .member-card:hover {
+            transform: translateY(-4px);
+        }
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 15px;
+        }
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-grad);
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .member-info h3 {
+            margin: 0 0 3px 0;
+            font-size: 16px;
+        }
+        .member-info p {
+            margin: 0;
+            font-size: 12px;
+            color: #34d399;
+            font-weight: 600;
+        }
+        .member-details {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+        }
+        .member-details div {
+            display: flex;
+            justify-content: space-between;
+        }
+        .delete-btn-absolute {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .delete-btn-absolute:hover {
+            background: #ef4444;
+            color: white;
+        }
+
+        #toastBox {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card-bg);
+            border: 1px solid #34d399;
+            color: var(--text-color);
+            padding: 14px 22px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(16px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        #toastBox.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        #toastBox i {
+            color: #34d399;
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: #030408;
+            color: #94a3b8;
+            padding: 40px 20px 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 80px;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toastBox"><i class="fas fa-info-circle"></i> <span id="toastMsg">Action successful</span></div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-content">
+            <a href="index.html" class="logo-area">
+                <div class="logo-badge">CSSC</div>
+                <div class="logo-text">
+                    <h1>Collectorate School Science Club</h1>
+                    <span>Official Directory</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="rules.html">Rules & Constitution</a></li>
+                <li><a href="students.html" class="active">Student Details</a></li>
+                <li><a href="performance.html">Performance</a></li>
+                <li><a href="#" class="admin-nav-btn" onclick="toggleAdminPanel()"><i class="fas fa-lock" id="adminLockIcon"></i> Admin Control</a></li>
+            </ul>
+            <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-header">
+            <div class="school-subname">CSSC • Collectorate School Science Club</div>
+            <h2>Club Members Directory</h2>
+            <p>Official list of registered active members and student coordinators</p>
+        </div>
+
+        <!-- Admin Control Panel to Add New Members -->
+        <section id="adminPanel" class="admin-panel-box">
+            <h3 style="margin-top:0; color:#34d399; font-size:16px; display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-user-plus"></i> Add New Member (Admin Mode)
+            </h3>
+            <form onsubmit="addNewMember(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="inputName" class="form-control" placeholder="e.g. Rafid Ahmed" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Class & Roll</label>
+                        <input type="text" id="inputClass" class="form-control" placeholder="Class 9 • Roll 05" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Club Role / Title</label>
+                        <input type="text" id="inputRole" class="form-control" placeholder="Member / Coordinator" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone / Email</label>
+                        <input type="text" id="inputContact" class="form-control" placeholder="017xxxxxxxx" required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="filter-bar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search member by name, roll, or role..." onkeyup="filterMembers()">
+            </div>
+        </div>
+
+        <!-- Members Grid Display -->
+        <div id="membersContainer" class="members-grid"></div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 CSSC (Collectorate School Science Club). All rights reserved.</p>
+    </footer>
+
+    <script>
+        let isAdmin = false;
+        const ADMIN_PASSWORD = "omlan123";
+
+        let membersList = [
+            { name: "Ahanaf Abid Omlan", classRoll: "Class 9 • Roll 01", role: "President", contact: "01724035478" },
+            { name: "General Secretary", classRoll: "Class 9 • Roll 02", role: "General Secretary", contact: "Active Member" },
+            { name: "Treasurer Lead", classRoll: "Class 9 • Roll 03", role: "Treasurer", contact: "Active Member" },
+            { name: "Nazifa Tabassum", classRoll: "Class 8 • Roll 12", role: "Science Researcher", contact: "Active Member" },
+            { name: "Tanvir Rahman", classRoll: "Class 9 • Roll 08", role: "Robotics Lead", contact: "Active Member" }
+        ];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadMembers();
+            filterMembers();
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('cssc_theme', next);
+            showToast(`Switched to ${next} mode`);
+        }
+
+        function toggleAdminPanel() {
+            if (!isAdmin) {
+                let enteredPass = prompt("Enter Admin Password:");
+                if (enteredPass === null) return;
+                
+                if (enteredPass !== ADMIN_PASSWORD) {
+                    showToast("Incorrect Password! Access Denied.");
+                    return;
+                }
+            }
+
+            isAdmin = !isAdmin;
+            const panel = document.getElementById('adminPanel');
+            const icon = document.getElementById('adminLockIcon');
+            
+            panel.style.display = isAdmin ? 'block' : 'none';
+            icon.className = isAdmin ? 'fas fa-unlock' : 'fas fa-lock';
+            
+            filterMembers(); 
+            showToast(isAdmin ? 'Admin Control Unlocked' : 'Admin Control Locked');
+        }
+
+        function loadMembers() {
+            const saved = localStorage.getItem('cssc_members_directory');
+            if (saved) {
+                try { membersList = JSON.parse(saved); } catch(e) {}
+            }
+        }
+
+        function saveMembers() {
+            localStorage.setItem('cssc_members_directory', JSON.stringify(membersList));
+        }
+
+        function renderMembers(list) {
+            const container = document.getElementById('membersContainer');
+            container.innerHTML = '';
+
+            if (list.length === 0) {
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">No members found.</p>`;
+                return;
+            }
+
+            list.forEach((m) => {
+                const originalIndex = membersList.findIndex(item => item.name === m.name && item.classRoll === m.classRoll);
+                const initials = m.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                
+                const card = document.createElement('div');
+                card.className = 'member-card';
+                card.innerHTML = `
+                    <button class="delete-btn-absolute" style="display: ${isAdmin ? 'flex' : 'none'};" onclick="deleteMember(${originalIndex})" title="Remove Member">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <div class="member-header">
+                        <div class="member-avatar">${initials}</div>
+                        <div class="member-info">
+                            <h3>${m.name}</h3>
+                            <p>${m.role}</p>
+                        </div>
+                    </div>
+                    <div class="member-details">
+                        <div><span>Class & Roll:</span> <strong>${m.classRoll}</strong></div>
+                        <div><span>Contact Info:</span> <strong>${m.contact}</strong></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function addNewMember(e) {
+            e.preventDefault();
+            const name = document.getElementById('inputName').value;
+            const classRoll = document.getElementById('inputClass').value;
+            const role = document.getElementById('inputRole').value;
+            const contact = document.getElementById('inputContact').value;
+
+            membersList.push({ name, classRoll, role, contact });
+            saveMembers();
+            filterMembers();
+
+            document.getElementById('inputName').value = '';
+            document.getElementById('inputClass').value = '';
+            document.getElementById('inputRole').value = '';
+            document.getElementById('inputContact').value = '';
+
+            showToast('New member added successfully!');
+        }
+
+        function deleteMember(index) {
+            if (confirm('Are you sure you want to remove this member?')) {
+                membersList.splice(index, 1);
+                saveMembers();
+                filterMembers();
+                showToast('Member removed successfully!');
+            }
+        }
+
+        function filterMembers() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = membersList.filter(m => 
+                m.name.toLowerCase().includes(query) || 
+                m.classRoll.toLowerCase().includes(query) || 
+                m.role.toLowerCase().includes(query)
+            );
+            renderMembers(filtered);
+        }
+    </script>
+</body>
+</html>
