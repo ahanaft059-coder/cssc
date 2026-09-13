@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rules & Constitution - CSSC (Collectorate School Science Club)</title>
+    <title>Rules & Constitution - Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
     
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,125 +17,193 @@
 
     <style>
         :root {
-            --bg-color: #050811;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-color: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.5);
+            --primary-hover: #059669;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(3, 7, 18, 0.9);
             --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
-            --accent-glow: rgba(16, 185, 129, 0.25);
             --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
         }
+
         [data-theme="light"] {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: rgba(255, 255, 255, 0.85);
             --text-color: #0f172a;
             --text-muted: #64748b;
+            --primary: #059669;
+            --primary-glow: rgba(5, 150, 105, 0.3);
+            --primary-hover: #047857;
             --border-color: rgba(0, 0, 0, 0.08);
-            --accent-glow: rgba(16, 185, 129, 0.15);
+            --nav-bg: rgba(248, 250, 252, 0.9);
+            --primary-grad: linear-gradient(135deg, #059669, #0891b2);
             --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
         }
 
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
             transition: background 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            width: 100%;
+            animation: pageEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .container {
-            max-width: 950px;
-            margin: 0 auto;
-            padding: 130px 20px 60px 20px;
+        @keyframes pageEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.97) translateY(15px);
+                filter: brightness(1.5) blur(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: brightness(1) blur(0px);
+            }
         }
 
+        /* Glowing Animated Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -250px;
+            left: -250px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 75%);
+            z-index: -1;
+            filter: blur(90px);
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(200px, 250px) scale(1.1); }
+        }
+
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--card-bg);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 14px 0;
-            box-shadow: var(--shadow);
+            z-index: 999;
+            padding: 10px 4%;
         }
+
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-        .logo-area {
+
+        .logo-title-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
-            color: var(--text-color);
         }
-        .logo-badge {
-            background: var(--primary-grad);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+
+        .unique-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            position: relative;
+            box-shadow: 0 0 15px var(--primary-glow);
+            border: 1px solid rgba(255,255,255,0.25);
+            flex-shrink: 0;
         }
-        .logo-text h1 {
-            margin: 0;
+        .unique-logo i {
+            color: #fff;
             font-size: 16px;
-            letter-spacing: 0.3px;
-        }
-        .logo-text span {
-            font-size: 11px;
-            color: #34d399;
-            font-weight: 600;
-            text-transform: uppercase;
         }
 
-        .nav-links {
+        .logo-text-box {
             display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
-        .nav-links li a {
-            text-decoration: none;
+
+        .logo-main-title {
+            font-size: 11px;
+            font-weight: 800;
             color: var(--text-color);
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
+            line-height: 1.2;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .nav-links li a:hover, .nav-links li a.active {
-            color: #34d399;
+
+        .logo-sub-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links-right {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links-right a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .nav-links-right a:hover, .nav-links-right a.active {
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .theme-btn {
             background: var(--card-bg);
-            color: var(--text-color);
             border: 1px solid var(--border-color);
-            padding: 9px 14px;
-            border-radius: 12px;
+            color: var(--text-color);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
-            transition: transform 0.2s;
+            font-size: 13px;
+            transition: all 0.3s;
         }
         .theme-btn:hover {
-            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Container & Page Header */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 130px 20px 60px 20px;
         }
 
         .page-header {
@@ -143,15 +211,16 @@
             margin-bottom: 45px;
         }
         .page-header h2 {
-            font-size: 34px;
+            font-size: clamp(26px, 4vw, 34px);
             margin: 0 0 10px 0;
             background: var(--primary-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
         .page-header .school-subname {
-            font-size: 14px;
-            color: #34d399;
+            font-size: 12px;
+            color: var(--primary);
             font-weight: 700;
             margin-bottom: 8px;
             text-transform: uppercase;
@@ -159,10 +228,11 @@
         }
         .page-header p {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14px;
             margin: 0;
         }
 
+        /* Chapter Cards */
         .chapter-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -171,16 +241,17 @@
             padding: 28px;
             margin-bottom: 30px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .chapter-card:hover {
             transform: translateY(-4px);
-            border-color: rgba(52, 211, 153, 0.3);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 35px var(--primary-glow);
         }
 
         .chapter-title {
-            font-size: 19px;
-            color: #34d399;
+            font-size: 18px;
+            color: var(--primary);
             margin-top: 0;
             margin-bottom: 20px;
             display: flex;
@@ -188,10 +259,10 @@
             gap: 12px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 12px;
-            font-weight: 600;
+            font-weight: 700;
         }
         .chapter-title i {
-            background: rgba(52, 211, 153, 0.12);
+            background: rgba(16, 185, 129, 0.12);
             padding: 10px;
             border-radius: 12px;
             font-size: 16px;
@@ -207,7 +278,7 @@
         }
 
         .rule-list li {
-            font-size: 14.5px;
+            font-size: 14px;
             color: var(--text-color);
             line-height: 1.7;
             display: flex;
@@ -220,7 +291,7 @@
             transition: background 0.2s;
         }
         .rule-list li:hover {
-            background: rgba(52, 211, 153, 0.04);
+            background: rgba(16, 185, 129, 0.04);
         }
 
         .rule-badge {
@@ -230,17 +301,18 @@
             font-weight: bold;
             padding: 3px 8px;
             border-radius: 6px;
-            min-width: 32px;
+            min-width: 34px;
             text-align: center;
             margin-top: 2px;
         }
 
+        /* Toast Notification */
         #toastBox {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: var(--card-bg);
-            border: 1px solid #34d399;
+            border: 1px solid var(--primary);
             color: var(--text-color);
             padding: 14px 22px;
             border-radius: 14px;
@@ -259,18 +331,19 @@
             opacity: 1;
         }
         #toastBox i {
-            color: #34d399;
+            color: var(--primary);
             font-size: 18px;
         }
 
+        /* Footer */
         footer {
-            background-color: #030408;
+            background: #020408;
             color: #94a3b8;
-            padding: 40px 20px 25px;
+            padding: 40px 16px 25px;
             border-top: 1px solid var(--border-color);
-            margin-top: 80px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
+            margin-top: 80px;
         }
     </style>
 </head>
@@ -281,42 +354,46 @@
     <!-- Header & Navigation -->
     <header>
         <div class="nav-content">
-            <a href="index.html" class="logo-area">
-                <div class="logo-badge">CSSC</div>
-                <div class="logo-text">
-                    <h1>Collectorate School Science Club</h1>
-                    <span>Official Science Club</span>
+            <a href="index.html" class="logo-title-area">
+                <div class="unique-logo"><i class="fas fa-atom"></i></div>
+                <div class="logo-text-box">
+                    <span class="logo-main-title">Karotoya Collectorate</span>
+                    <span class="logo-sub-title">Science Club</span>
                 </div>
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="rules.html" class="active">Rules & Constitution</a></li>
-                <li><a href="students.html">Student Details</a></li>
-                <li><a href="performance.html">Performance</a></li>
+
+            <ul class="nav-links-right">
+                <div class="nav-desktop-links" style="display: flex; gap: 20px; align-items: center;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="rules.html" class="active">Rules</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="performance.html">Performance</a></li>
+                    <li><a href="about.html">About</a></li>
+                </div>
+                <li><button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button></li>
             </ul>
-            <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
         </div>
     </header>
 
     <div class="container">
         
         <div class="page-header">
-            <div class="school-subname">CSSC • Collectorate School Science Club</div>
+            <div class="school-subname">Karotoya Collectorate Adarsha Siksha Niketan Science Club</div>
             <h2>ক্লাবের গঠনতন্ত্র ও নিয়মাবলি</h2>
-            <p>Collectorate School Science Club (CSSC)-এর সকল সদস্যের জন্য বাধ্যতামূলক নীতিমালা ও নির্দেশিকা</p>
+            <p>সদস্যদের জন্য বাধ্যতামূলক শৃঙ্খলা, কার্যক্রম ও পরিচালনা সংক্রান্ত নীতিমালা</p>
         </div>
 
         <!-- অধ্যায় ১ -->
         <div class="chapter-card">
             <h3 class="chapter-title"><i class="fas fa-user-shield"></i> অধ্যায় ১: সদস্য পদের যোগ্যতা ও শর্তাবলি</h3>
             <ul class="rule-list">
-                <li><span class="rule-badge">১.১</span><span>সদস্য হতে হলে অবশ্যই সংশ্লিষ্ট স্কুলের শিক্ষার্থী হতে হবে।</span></li>
-                <li><span class="rule-badge">১.২</span><span>শিক্ষার্থীর চারিত্রিক গুণাবলি ভালো হতে হবে এবং স্কুলের শৃঙ্খলা বজায় রাখতে হবে।</span></li>
-                <li><span class="rule-badge">১.৩</span><span>ফরম পূরণের সময় শিক্ষার্থীকে অবশ্যই সঠিক ও সম্পূর্ণ তথ্য প্রদান করতে বাধ্য থাকতে হবে।</span></li>
-                <li><span class="rule-badge">১.৪</span><span>কর্তৃপক্ষ কর্তৃক গৃহীত যেকোনো সিদ্ধান্ত সদস্যের মানতে বাধ্য থাকিবে এবং কোনো বিষয়ে আপত্তি থাকলে নিয়মতান্ত্রিক উপায়ে নিজ মতামত প্রদানের সুযোগ থাকবে।</span></li>
+                <li><span class="rule-badge">১.১</span><span>সদস্য হতে হলে অবশ্যই কারতোয়া কালেক্টরেট আদর্শ শিক্ষা নিকেতনের শিক্ষার্থী হতে হবে।</span></li>
+                <li><span class="rule-badge">১.২</span><span>শিক্ষার্থীর চারিত্রিক গুণাবলি ভালো হতে হবে এবং স্কুলের সাধারণ শৃঙ্খলা কঠোরভাবে বজায় রাখতে হবে।</span></li>
+                <li><span class="rule-badge">১.৩</span><span>রেজিস্ট্রেশন বা ফরম পূরণের সময় শিক্ষার্থীকে অবশ্যই সঠিক ও সম্পূর্ণ তথ্য প্রদান করতে হবে।</span></li>
+                <li><span class="rule-badge">১.৪</span><span>ক্লাব কর্তৃপক্ষ বা উপদেষ্টামণ্ডলী কর্তৃক গৃহীত যেকোনো সিদ্ধান্ত সকল সদস্য মেনে চলতে বাধ্য থাকিবে।</span></li>
                 <li><span class="rule-badge">১.৫</span><span>কোনো সদস্য ব্যক্তিগতভাবে কোনো অন্যায় বা অপরাধ করিলে তার দায়ভার বা দোষ ক্লাবের ওপর বর্তাবে না।</span></li>
-                <li><span class="rule-badge">১.৬</span><span>যদি কোনো সদস্য গুরুতর অপরাধ বা নিয়ম লঙ্ঘন করে, তবে তদন্ত সাপেক্ষে তার সদস্যপদ বাতিল করা হবে।</span></li>
-                <li><span class="rule-badge">১.৭</span><span>ক্লাবের সদস্য হতে হলে এককালীন বা নির্ধারিত বাধ্যতামূলক ফি হিসেবে ৫০ টাকা প্রদান করতে হবে।</span></li>
+                <li><span class="rule-badge">১.৬</span><span>যদি কোনো সদস্য গুরুতর অপরাধ, শৃঙ্খলাভঙ্গ বা ক্লাবের সুনাম ক্ষুণ্ন করে, তবে তদন্ত সাপেক্ষে তার সদস্যপদ বাতিল করা হবে।</span></li>
+                <li><span class="rule-badge">১.৭</span><span>ক্লাবের প্রাথমিক কার্যক্রম পরিচালনার জন্য নির্ধারিত এককালীন সদস্য ফি ৫০ টাকা প্রদান করতে হবে।</span></li>
             </ul>
         </div>
 
@@ -324,20 +401,22 @@
         <div class="chapter-card">
             <h3 class="chapter-title"><i class="fas fa-balance-scale"></i> অধ্যায় ২: নিয়মাবলি ও শৃঙ্খলা</h3>
             <ul class="rule-list">
-                <li><span class="rule-badge">২.১</span><span>ক্লাবের ভেতরে বা এর ব্যানারে কোনো ধরনের রাজনৈতিক কার্যক্রম পরিচালনা করা যাবে না।</span></li>
-                <li><span class="rule-badge">২.২</span><span>ক্লাবে কোনো ধরনের বিশৃঙ্খলা, দলীয় কোন্দল বা অসামাজিক কার্যক্রম করা যাবে না; কোনো সদস্য এমন অপরাধ করলে তাৎক্ষণিকভাবে তার সদস্যপদ বাতিল হবে।</span></li>
-                <li><span class="rule-badge">২.৩</span><span>ক্লাব কর্তৃক আয়োজিত যেকোনো বিজ্ঞান সেমিনার, ওয়ার্কশপ বা সভায় সকল সদস্যকে স্বতঃস্ফূর্তভাবে অংশগ্রহণ করতে হবে।</span></li>
-                <li><span class="rule-badge">২.৪</span><span>পড়ালেখা বা ক্লাস ফাঁকি দেওয়ার অসৎ উদ্দেশ্যে ক্লাবের কার্যক্রমকে ব্যবহার করা যাবে না; এমন উদ্দেশ্য থাকলে ক্লাবের কার্যক্রমে অংশ নেওয়ার প্রয়োজন নেই।</span></li>
+                <li><span class="rule-badge">২.১</span><span>ক্লাবের ভেতরে বা এর ব্যানারে কোনো ধরনের রাজনৈতিক কার্যক্রম বা অপপ্রচার চালানো সম্পূর্ণ নিষিদ্ধ।</span></li>
+                <li><span class="rule-badge">২.২</span><span>ক্লাবে কোনো ধরনের বিশৃঙ্খলা, দলীয় কোন্দল বা সাইবার বুলিং বরদাস্ত করা হবে না; এমন অপরাধে তাৎক্ষণিক শাস্তিমূলক ব্যবস্থা নেওয়া হবে।</span></li>
+                <li><span class="rule-badge">২.৩</span><span>ক্লাব কর্তৃক আয়োজিত প্রতিটি বিজ্ঞান সেমিনার, ওয়ার্কশপ বা প্রজেক্ট প্রদর্শনীতে সদস্যদের উপস্থিতি বাধ্যতামূলক।</span></li>
+                <li><span class="rule-badge">২.৪</span><span>পড়ালেখা বা স্কুল ফাঁকি দেওয়ার অসৎ উদ্দেশ্যে ক্লাবের কার্যক্রম বা নাম ব্যবহার করা যাবে না।</span></li>
+                <!-- নতুন সংযোজিত রুল -->
+                <li><span class="rule-badge">২.৫</span><span>ক্লাবের ল্যাব বা গ্যাজেটস ব্যবহারের সময় পূর্ণ সতর্কতা অবলম্বন করতে হবে; কোনো যন্ত্রাংশের ক্ষতি সাধন করলে তার দায়ভার সংশ্লিষ্ট ব্যবহারকারীকে বহন করতে হবে।</span></li>
             </ul>
         </div>
 
         <!-- অধ্যায় ৩ -->
         <div class="chapter-card">
-            <h3 class="chapter-title"><i class="fas fa-users-cog"></i> অধ্যায় ৩: কার্যনির্বাহী কমিটি</h3>
+            <h3 class="chapter-title"><i class="fas fa-users-cog"></i> অধ্যায় ৩: কার্যনির্বাহী কমিটি (৫ সদস্য বিশিষ্ট)</h3>
             <ul class="rule-list">
-                <li><span class="rule-badge">৩.১</span><span>ক্লাবের সার্বিক কার্যক্রম পরিচালনার জন্য ১ বছর মেয়াদী একটি কার্যনির্বাহী কমিটি গঠিত হবে।</span></li>
-                <li><span class="rule-badge">৩.২</span><span>কমিটিতে প্রধান উপদেষ্টা হিসেবে বিদ্যালয়ের একজন বিজ্ঞ শিক্ষক দায়িত্ব পালন করবেন।</span></li>
-                <li><span class="rule-badge">৩.৩</span><span>ছাত্র-ছাত্রীদের মধ্য থেকে গণতান্ত্রিক প্রক্রিয়ায় অথবা উপদেষ্টামণ্ডলীর পরামর্শক্রমে নিম্নলিখিত পদগুলোতে দায়িত্ব বণ্টন করা হবে: সভাপতি, সাধারণ সম্পাদক, কোষাধ্যক্ষ, সাংগঠনিক সম্পাদক, প্রজেক্ট ও গবেষণা সম্পাদক, প্রচার ও প্রকাশনা সম্পাদক।</span></li>
+                <li><span class="rule-badge">৩.১</span><span>ক্লাবের সার্বিক কার্যক্রম পরিচালনার জন্য ১ বছর মেয়াদী ৫ সদস্য বিশিষ্ট একটি কার্যনির্বাহী কমিটি গঠিত হবে।</span></li>
+                <li><span class="rule-badge">৩.২</span><span>কমিটিতে প্রধান উপদেষ্টা হিসেবে বিদ্যালয়ের সম্মানিত বিজ্ঞ শিক্ষকগণ দায়িত্ব পালন করবেন।</span></li>
+                <li><span class="rule-badge">৩.৩</span><span>শিক্ষার্থীদের মধ্য থেকে গণতান্ত্রিক প্রক্রিয়া বা উপদেষ্টামণ্ডলীর মূল্যায়নের ভিত্তিতে ৫টি মূল পদে দায়িত্ব বণ্টন করা হবে: <strong>প্রেসিডেন্ট (President)</strong>, <strong>জেনারেল সেক্রেটারি (General Secretary)</strong>, <strong>টেক লিড / রোবটিক্স (Tech Lead)</strong>, <strong>ট্রেজারার (Treasurer)</strong> এবং <strong>অর্গানাইজিং সেক্রেটারি (Organizing Secretary)</strong>।</span></li>
             </ul>
         </div>
 
@@ -346,8 +425,10 @@
             <h3 class="chapter-title"><i class="fas fa-flask"></i> অধ্যায় ৪: কার্যক্রম ও কার্যাবলী</h3>
             <ul class="rule-list">
                 <li><span class="rule-badge">৪.১</span><span>প্রতি মাসে অন্তত একটি সাধারণ সভা এবং একটি বিজ্ঞানভিত্তিক কর্মশালা (Workshop) বা প্রজেক্ট প্রদর্শনী আয়োজন করা।</span></li>
-                <li><span class="rule-badge">৪.২</span><span>জাতীয় বিজ্ঞান মেলা এবং বিভিন্ন বিজ্ঞান অলিম্পিয়াড (যেমন: গণিত, পদার্থবিজ্ঞান, জ্যোতির্বিজ্ঞান, জীববিজ্ঞান অলিম্পিয়াড) ও কুইজ প্রতিযোগিতায় স্কুলের শিক্ষার্থীদের অংশগ্রহণ নিশ্চিত করা।</span></li>
-                <li><span class="rule-badge">৪.৩</span><span>বিজ্ঞানভিত্তিক দেওয়ালিকা (Wall Magazine) প্রকাশ এবং বিজ্ঞান ম্যাগাজিন তৈরি করা।</span></li>
+                <li><span class="rule-badge">৪.২</span><span>জাতীয় বিজ্ঞান মেলা, বিজ্ঞান অলিম্পিয়াড (গণিত, পদার্থবিজ্ঞান, জীববিজ্ঞান) এবং কুইজ প্রতিযোগিতায় স্কুলের শিক্ষার্থীদের সক্রিয় অংশগ্রহণ নিশ্চিত করা।</span></li>
+                <li><span class="rule-badge">৪.৩</span><span>বিজ্ঞানভিত্তিক দেওয়ালিকা প্রকাশ, মডেলিং (যেমন: স্মার্ট ভিলেজ প্রজেক্ট) এবং বিজ্ঞান ম্যাগাজিন তৈরিতে কাজ করা।</span></li>
+                <!-- নতুন সংযোজিত রুল -->
+                <li><span class="rule-badge">৪.৪</span><span>সদস্যদের প্রোগ্রামিং, বেসিক রোবটিক্স ও বৈজ্ঞানিক গবেষণা বিষয়ক স্কিল ডেভেলপমেন্ট সেশনের ব্যবস্থা করা।</span></li>
             </ul>
         </div>
 
@@ -355,9 +436,9 @@
         <div class="chapter-card">
             <h3 class="chapter-title"><i class="fas fa-wallet"></i> অধ্যায় ৫: তহবিল ও অর্থায়ন</h3>
             <ul class="rule-list">
-                <li><span class="rule-badge">৫.১</span><span>সদস্যদের কাছ থেকে সংগৃহীত প্রবেশ ফি (৫০ টাকা), বার্ষিক চাঁদা, বিদ্যালয়ের অনুদান এবং বিজ্ঞান মেলা বা বিশেষ আয়োজনের স্পন্সরশিপের মাধ্যমে ক্লাবের তহবিল গঠিত হবে।</span></li>
-                <li><span class="rule-badge">৫.২</span><span>কোষাধ্যক্ষ ক্লাবের যাবতীয় আয়ের হিসাব স্বচ্ছতার সাথে সংরক্ষণ করবেন এবং প্রতি টার্মে তা প্রধান উপদেষ্টা বা প্রধান শিক্ষকের নিকট পেশ করবেন।</span></li>
-                <li><span class="rule-badge">৫.৩</span><span>প্রধান শিক্ষক বা প্রধান উপদেষ্টার অনুমোদন ছাড়া ক্লাবের তহবিল থেকে কোনো অর্থ খরচ বা উত্তোলন করা যাবে না।</span></li>
+                <li><span class="rule-badge">৫.১</span><span>সদস্যদের প্রবেশ ফি, বার্ষিক চাঁদা, বিদ্যালয়ের অনুদান এবং বিজ্ঞান মেলা বা বিশেষ আয়োজনের স্পন্সরশিপের মাধ্যমে ক্লাবের তহবিল গঠিত হবে।</span></li>
+                <li><span class="rule-badge">৫.২</span><span>কোষাধ্যক্ষ (Treasurer) ক্লাবের যাবতীয় আয়ের হিসাব স্বচ্ছতার সাথে সংরক্ষণ করবেন এবং প্রতি টার্মে প্রধান উপদেষ্টার নিকট পেশ করবেন।</span></li>
+                <li><span class="rule-badge">৫.৩</span><span>প্রধান শিক্ষক বা প্রধান উপদেষ্টার লিখিত অনুমোদন ছাড়া ক্লাবের তহবিল থেকে কোনো অর্থ খরচ বা উত্তোলন করা যাবে না।</span></li>
             </ul>
         </div>
 
@@ -372,7 +453,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 CSSC (Collectorate School Science Club). All rights reserved.</p>
+        <p>&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</p>
     </footer>
 
     <script>
