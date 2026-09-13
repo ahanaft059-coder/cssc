@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Collectorate School Science Club (CSSC)</title>
+    <title>About Us - Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
     
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,232 +17,332 @@
 
     <style>
         :root {
-            --bg-color: #050811;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-color: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.5);
+            --primary-hover: #059669;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(3, 7, 18, 0.9);
             --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
-            --accent-glow: rgba(16, 185, 129, 0.25);
             --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
         }
+
         [data-theme="light"] {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: rgba(255, 255, 255, 0.85);
             --text-color: #0f172a;
             --text-muted: #64748b;
+            --primary: #059669;
+            --primary-glow: rgba(5, 150, 105, 0.3);
+            --primary-hover: #047857;
             --border-color: rgba(0, 0, 0, 0.08);
-            --accent-glow: rgba(16, 185, 129, 0.15);
+            --nav-bg: rgba(248, 250, 252, 0.9);
+            --primary-grad: linear-gradient(135deg, #059669, #0891b2);
             --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
         }
 
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background 0.4s ease, color 0.4s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            width: 100%;
+            animation: pageEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Navigation Header */
+        @keyframes pageEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.97) translateY(15px);
+                filter: brightness(1.5) blur(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: brightness(1) blur(0px);
+            }
+        }
+
+        /* Glowing Animated Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -250px;
+            left: -250px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 75%);
+            z-index: -1;
+            filter: blur(90px);
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(200px, 250px) scale(1.1); }
+        }
+
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--card-bg);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 16px 0;
-            box-shadow: var(--shadow);
+            z-index: 999;
+            padding: 10px 4%;
         }
+
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-        .logo-area {
+
+        .logo-title-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
-            color: var(--text-color);
         }
-        .logo-badge {
-            background: var(--primary-grad);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+
+        .unique-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 17px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            position: relative;
+            box-shadow: 0 0 15px var(--primary-glow);
+            border: 1px solid rgba(255,255,255,0.25);
+            flex-shrink: 0;
         }
-        .logo-text h1 {
-            margin: 0;
-            font-size: 18px;
-            letter-spacing: 0.5px;
-        }
-        .logo-text span {
-            font-size: 11px;
-            color: #34d399;
-            font-weight: 600;
-            text-transform: uppercase;
+        .unique-logo i {
+            color: #fff;
+            font-size: 16px;
         }
 
-        .nav-links {
+        .logo-text-box {
             display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
-        .nav-links li a {
-            text-decoration: none;
+
+        .logo-main-title {
+            font-size: 11px;
+            font-weight: 800;
             color: var(--text-color);
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
+            line-height: 1.2;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .nav-links li a:hover, .nav-links li a.active {
-            color: #34d399;
+
+        .logo-sub-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links-right {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links-right a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .nav-links-right a:hover, .nav-links-right a.active {
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .theme-btn {
             background: var(--card-bg);
-            color: var(--text-color);
             border: 1px solid var(--border-color);
-            padding: 9px 14px;
-            border-radius: 12px;
+            color: var(--text-color);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
-            transition: transform 0.2s;
+            font-size: 13px;
+            transition: all 0.3s;
         }
         .theme-btn:hover {
-            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
-        /* Page Banner Hero */
-        .page-hero {
-            padding: 160px 20px 60px;
-            text-align: center;
-            background: radial-gradient(circle at center, var(--accent-glow) 0%, var(--bg-color) 70%);
+        /* Container & Page Header */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 130px 20px 60px 20px;
         }
-        .page-hero h2 {
-            font-size: 42px;
-            margin: 0 0 15px 0;
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        .page-header h2 {
+            font-size: clamp(26px, 4vw, 34px);
+            margin: 0 0 10px 0;
             background: var(--primary-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            font-weight: 800;
         }
-        .page-hero p {
-            font-size: 16px;
+        .page-header .school-subname {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .page-header p {
             color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
+            font-size: 14px;
+            margin: 0;
         }
 
-        /* Section Styling */
-        section {
-            padding: 40px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        /* About Content Grid */
+        /* About Grid Layout */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: center;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
         }
-        @media(max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; }
-        }
+
         .about-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 28px;
             box-shadow: var(--shadow);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
+        .about-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 35px var(--primary-glow);
+        }
+
         .about-card h3 {
-            color: #34d399;
-            font-size: 20px;
+            font-size: 18px;
+            color: var(--primary);
             margin-top: 0;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            font-weight: 700;
         }
-        .about-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin: 0 0 15px 0;
+        .about-card h3 i {
+            background: rgba(16, 185, 129, 0.12);
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 16px;
         }
 
-        /* Mission / Vision Cards */
+        .about-card p {
+            font-size: 14px;
+            color: var(--text-color);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+        .about-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Mission / Vision Grid */
         .mv-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 40px;
+            gap: 25px;
         }
         @media(max-width: 768px) {
-            .mv-grid { grid-template-columns: 1fr; }
+            .mv-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
         .mv-box {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
+            backdrop-filter: blur(16px);
             border-radius: 20px;
-            padding: 24px;
+            padding: 28px;
             box-shadow: var(--shadow);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .mv-box i {
-            font-size: 28px;
-            color: #34d399;
-            margin-bottom: 15px;
-        }
-        .mv-box h4 {
-            margin: 0 0 10px 0;
-            font-size: 18px;
-        }
-        .mv-box p {
-            margin: 0;
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
+        .mv-box:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 35px var(--primary-glow);
         }
 
-        /* Toast Notification Box */
+        .mv-box i {
+            font-size: 22px;
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.12);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .mv-box h4 {
+            font-size: 17px;
+            color: var(--text-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .mv-box p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Toast Notification */
         #toastBox {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: var(--card-bg);
-            border: 1px solid #34d399;
+            border: 1px solid var(--primary);
             color: var(--text-color);
             padding: 14px 22px;
             border-radius: 14px;
@@ -261,23 +361,19 @@
             opacity: 1;
         }
         #toastBox i {
-            color: #34d399;
+            color: var(--primary);
             font-size: 18px;
         }
 
-        /* Simplified Footer */
+        /* Footer */
         footer {
-            background-color: #030408;
+            background: #020408;
             color: #94a3b8;
-            padding: 30px 20px;
+            padding: 40px 16px 25px;
             border-top: 1px solid var(--border-color);
-            margin-top: 60px;
             text-align: center;
-        }
-        footer p {
-            margin: 0;
-            font-size: 13px;
-            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 80px;
         }
     </style>
 </head>
@@ -288,85 +384,85 @@
     <!-- Header & Navigation -->
     <header>
         <div class="nav-content">
-            <a href="index.html" class="logo-area">
-                <div class="logo-badge">CSSC</div>
-                <div class="logo-text">
-                    <h1>CSSC</h1>
-                    <span>Collectorate School Science Club</span>
+            <a href="index.html" class="logo-title-area">
+                <div class="unique-logo"><i class="fas fa-atom"></i></div>
+                <div class="logo-text-box">
+                    <span class="logo-main-title">Karotoya Collectorate</span>
+                    <span class="logo-sub-title">Science Club</span>
                 </div>
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About Us</a></li>
-                <li><a href="rules.html">Rules & Constitution</a></li>
-                <li><a href="students.html">Student Details</a></li>
-                <li><a href="performance.html">Performance</a></li>
+
+            <ul class="nav-links-right">
+                <div class="nav-desktop-links" style="display: flex; gap: 20px; align-items: center;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About Us</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="performance.html">Performance</a></li>
+                </div>
+                <li><button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button></li>
             </ul>
-            <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
         </div>
     </header>
 
-    <!-- Page Banner Hero -->
-    <section class="page-hero">
-        <div class="container">
-            <h2>About Collectorate School Science Club</h2>
-            <p>Discover our heritage, objectives, and the driving force behind youth scientific advancement.</p>
-        </div>
-    </section>
-
-    <!-- Main Content Section -->
     <div class="container">
+        
+        <div class="page-header">
+            <div class="school-subname">Karotoya Collectorate Adarsha Siksha Niketan Science Club</div>
+            <h2>আমাদের সম্পর্কে (About Us)</h2>
+            <p>আমাদের ইতিহাস, লক্ষ্য এবং তরুণ বিজ্ঞান মনস্কদের এগিয়ে নেওয়ার পেছনের অনুপ্রেরণা</p>
+        </div>
 
+        <!-- About Cards Grid -->
         <div class="about-grid">
             <div class="about-card">
-                <h3><i class="fas fa-book-open"></i> Who We Are</h3>
-                <p>Collectorate School Science Club (CSSC) is an active platform dedicated to nurturing young scientific talents, problem-solvers, and innovators. We cultivate a hands-on learning environment where students explore physics, chemistry, biology, computer programming, and robotics beyond classroom boundaries.</p>
-                <p>Through annual science fairs, competitive exam coaching, and collaborative project building, our members consistently push the envelope of creative engineering and scientific inquiry.</p>
+                <h3><i class="fas fa-book-open"></i> আমরা কারা?</h3>
+                <p>কারতোয়া কালেক্টরেট আদর্শ শিক্ষা নিকেতন সায়েন্স ক্লাব (CSSC) হলো তরুণ বিজ্ঞান প্রতিভা, সমস্যা সমাধানকারী এবং উদীয়মান উদ্ভাবকদের লালন করার একটি গতিশীল প্ল্যাটফর্ম। আমরা এমন একটি হাতে-কলমে শেখার পরিবেশ তৈরি করি যেখানে শিক্ষার্থীরা ক্লাসরুমের গণ্ডির বাইরে পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, কম্পিউটার প্রোগ্রামিং এবং রোবোটিক্স নিয়ে কাজ করার সুযোগ পায়।</p>
+                <p>বার্ষিক বিজ্ঞান মেলা, প্রতিযোগিতামূলক পরীক্ষা প্রস্তুতি এবং সহযোগিতামূলক প্রজেক্ট তৈরির মাধ্যমে আমাদের সদস্যরা সৃজনশীল প্রকৌশল ও বৈজ্ঞানিক অনুসন্ধিৎসায় নিয়মিত নিজেদের দক্ষ করে তুলছে।</p>
             </div>
+
             <div class="about-card">
-                <h3><i class="fas fa-history"></i> Our Journey & Establishment</h3>
-                <p>Established in 2026 with a vision to spark logical thinking and curiosity among students, CSSC has rapidly grown into a vibrant academic community within the institution.</p>
-                <p>From organizing internal lab sessions to competing in national olympiads and science fiestas, our community stands firmly on the pillars of dedication, teamwork, and continuous discovery.</p>
+                <h3><i class="fas fa-history"></i> আমাদের প্রতিষ্ঠা ও যাত্রা</h3>
+                <p>শিক্ষার্থীদের মাঝে যৌক্তিক চিন্তা, কৌতূহল এবং বিজ্ঞানমনস্কতা জাগিয়ে তোলার দূরদর্শী ভাবনা থেকে ২০২৬ সালে এই ক্লাবটি প্রতিষ্ঠিত হয়। অল্প সময়ের মধ্যেই CSSC স্কুলের অন্যতম একটি প্রাণবন্ত ও সক্রিয় অ্যাকাডেমিক কমিউনিটিতে পরিণত হয়েছে।</p>
+                <p>ইন-হাউস ল্যাব সেশনের আয়োজন থেকে শুরু করে জাতীয় বিজ্ঞান অলিম্পিয়াড এবং সায়েন্স ফিয়েস্তায় অংশগ্রহণ—আমাদের এই কমিউনিটি নিষ্ঠা, দলগত কাজ এবং নতুন আবিষ্কারের ওপর ভিত্তি করে দৃঢ়ভাবে এগিয়ে চলেছে।</p>
             </div>
         </div>
 
+        <!-- Mission & Vision Grid -->
         <div class="mv-grid">
             <div class="mv-box">
                 <i class="fas fa-bullseye"></i>
-                <h4>Our Mission</h4>
-                <p>To empower students with deep analytical thinking, practical experimental skills, and technical proficiency in modern science and tech disciplines like coding and robotics.</p>
+                <h4>আমাদের লক্ষ্য (Our Mission)</h4>
+                <p>শিক্ষার্থীদের গভীর বিশ্লেষণাত্মক চিন্তাভাবনা, বাস্তবসম্মত পরীক্ষামূলক দক্ষতা এবং আধুনিক বিজ্ঞান ও প্রযুক্তি যেমন কোডিং ও রোবোটিক্সে কারিগরি পারদর্শিতা দিয়ে শক্তিশালী করা।</p>
             </div>
+            
             <div class="mv-box">
                 <i class="fas fa-eye"></i>
-                <h4>Our Vision</h4>
-                <p>To build a generation of visionary leaders and creators capable of designing sustainable solutions for future technological and environmental challenges.</p>
+                <h4>আমাদের দৃষ্টিভঙ্গি (Our Vision)</h4>
+                <p>ভবিষ্যতের প্রযুক্তিগত এবং পরিবেশগত চ্যালেঞ্জগুলো মোকাবিলায় টেকসই সমাধান তৈরি করতে সক্ষম দূরদর্শী নেতা ও নির্মাতাদের একটি প্রজন্ম গড়ে তোলা।</p>
             </div>
         </div>
 
     </div>
 
-    <!-- Simplified Footer -->
     <footer>
-        <p>&copy; 2026 CSSC (Collectorate School Science Club). All rights reserved.</p>
+        <p>&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</p>
     </footer>
 
     <script>
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('cssc_theme', newTheme);
-            showToast('Theme switched to ' + newTheme + ' mode');
+        function showToast(msg) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        function showToast(msg) {
-            const box = document.getElementById('toastBox');
-            const text = document.getElementById('toastMsg');
-            text.innerText = msg;
-            box.classList.add('show');
-            setTimeout(() => {
-                box.classList.remove('show');
-            }, 3000);
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('cssc_theme', next);
+            showToast(`Switched to ${next} mode`);
         }
     </script>
 </body>
