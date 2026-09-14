@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Performance & Attendance - Collectorate School Science Club (CSSC)</title>
+    <title>Performance & 15-Day Attendance - Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
     
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,380 +17,346 @@
 
     <style>
         :root {
-            --bg-color: #050811;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-color: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.5);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(3, 7, 18, 0.9);
             --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
-            --accent-glow: rgba(16, 185, 129, 0.25);
             --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+            --present: #22c55e;
+            --absent: #ef4444;
         }
+
         [data-theme="light"] {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: rgba(255, 255, 255, 0.85);
             --text-color: #0f172a;
             --text-muted: #64748b;
+            --primary: #059669;
+            --primary-glow: rgba(5, 150, 105, 0.3);
             --border-color: rgba(0, 0, 0, 0.08);
-            --accent-glow: rgba(16, 185, 129, 0.15);
+            --nav-bg: rgba(248, 250, 252, 0.9);
+            --primary-grad: linear-gradient(135deg, #059669, #0891b2);
             --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
+            --present: #16a34a;
+            --absent: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
+            line-height: 1.6;
             transition: background 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            width: 100%;
+            animation: pageEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px 60px 20px;
+        @keyframes pageEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.97) translateY(15px);
+                filter: brightness(1.5) blur(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: brightness(1) blur(0px);
+            }
         }
 
-        /* Navigation Header */
+        /* Glowing Animated Background Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -250px;
+            left: -250px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 75%);
+            z-index: -1;
+            filter: blur(90px);
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(200px, 250px) scale(1.1); }
+        }
+
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--card-bg);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 16px 0;
-            box-shadow: var(--shadow);
+            z-index: 999;
+            padding: 10px 4%;
         }
+
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-        .logo-area {
+
+        .logo-title-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
-            color: var(--text-color);
         }
-        .logo-badge {
-            background: var(--primary-grad);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+
+        .unique-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 17px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            position: relative;
+            box-shadow: 0 0 15px var(--primary-glow);
+            border: 1px solid rgba(255,255,255,0.25);
+            flex-shrink: 0;
         }
-        .logo-text h1 {
-            margin: 0;
-            font-size: 18px;
+        .unique-logo i {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .logo-text-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-color);
+            line-height: 1.2;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logo-sub-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .logo-text span {
-            font-size: 11px;
-            color: #34d399;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
 
-        .nav-links {
+        .nav-links-right {
             display: flex;
-            gap: 20px;
             list-style: none;
-            margin: 0;
-            padding: 0;
+            gap: 20px;
             align-items: center;
-            flex-wrap: wrap;
-        }
-        .nav-links li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links li a:hover, .nav-links li a.active {
-            color: #34d399;
         }
 
-        .admin-nav-btn {
-            background: rgba(52, 211, 153, 0.15);
-            color: #34d399 !important;
-            border: 1px dashed #34d399;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 13px !important;
-            cursor: pointer;
-            transition: all 0.2s;
+        .nav-links-right a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s, transform 0.2s;
         }
-        .admin-nav-btn:hover {
-            background: rgba(52, 211, 153, 0.25);
+
+        .nav-links-right a:hover, .nav-links-right a.active {
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .theme-btn {
             background: var(--card-bg);
-            color: var(--text-color);
             border: 1px solid var(--border-color);
-            padding: 9px 14px;
-            border-radius: 12px;
+            color: var(--text-color);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
-            transition: transform 0.2s;
+            font-size: 13px;
+            transition: all 0.3s;
         }
         .theme-btn:hover {
-            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
-        /* Page Banner */
-        .page-banner {
-            text-align: center;
-            margin-bottom: 30px;
+        /* Container & Page Header */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 130px 20px 60px 20px;
         }
-        .page-banner h2 {
-            font-size: 38px;
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        .page-header h2 {
+            font-size: clamp(24px, 4vw, 32px);
             margin: 0 0 10px 0;
             background: var(--primary-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
-        .page-banner p {
+        .page-header .school-subname {
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .page-header p {
             color: var(--text-muted);
-            font-size: 16px;
+            font-size: 14px;
             margin: 0;
         }
 
-        /* Login Modal Overlay */
-        #loginModal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 8, 17, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-card {
+        /* Card Layout */
+        .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 30px;
-            border-radius: 24px;
-            width: 100%;
-            max-width: 400px;
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            padding: 25px;
             box-shadow: var(--shadow);
-            text-align: center;
-        }
-        .modal-card h3 {
-            margin-top: 0;
-            color: #34d399;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        /* Admin Control Panel (Hidden by default behind password) */
-        .admin-panel-box {
-            display: none;
-            border: 2px dashed #34d399;
-            padding: 30px;
-            border-radius: 24px;
-            background: rgba(52, 211, 153, 0.03);
-            margin-bottom: 40px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        @media(max-width: 900px) {
-            .form-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media(max-width: 500px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .form-group label {
-            font-size: 12px;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .form-control {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 14px;
-            outline: none;
-        }
-        .form-actions {
-            display: flex;
-            gap: 10px;
-        }
-        .btn-primary {
-            background: var(--primary-grad);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 14px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px var(--accent-glow);
-        }
-        .btn-secondary {
-            background: var(--card-bg);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 12px 20px;
-            border-radius: 14px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* Filter & Search Bar */
-        .filter-container {
+        .controls-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 16px 24px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            gap: 15px;
             flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
         }
+
         .search-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            padding: 10px 16px;
-            border-radius: 12px;
+            position: relative;
             flex: 1;
             min-width: 250px;
         }
         .search-box input {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            outline: none;
-            font-size: 14px;
             width: 100%;
-        }
-        .search-box i { color: var(--text-muted); }
-
-        /* Table Card */
-        .table-card {
-            background: var(--card-bg);
+            background: var(--bg-color);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: var(--shadow);
-            overflow-x: auto;
-            margin-bottom: 40px;
+            padding: 10px 15px 10px 40px;
+            border-radius: 10px;
+            color: var(--text-color);
+            font-size: 13px;
         }
-        .table-card h3 {
-            margin: 0 0 20px 0;
-            font-size: 20px;
-            color: #34d399;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* Table Design */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 14px;
+            font-size: 13px;
+            white-space: nowrap;
         }
+
         th, td {
-            padding: 14px 16px;
+            padding: 12px 14px;
             border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
         }
+
         th {
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-            background: rgba(255, 255, 255, 0.01);
-        }
-        tr:hover td { background: rgba(52, 211, 153, 0.02); }
-
-        .status-badge {
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-        .status-present { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
-        .status-absent { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
-        .status-late { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
-
-        .perf-rating {
-            font-weight: bold;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            display: inline-block;
-        }
-        .rating-excellent { color: #34d399; background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.2); }
-        .rating-good { color: #38bdf8; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2); }
-        .rating-average { color: #fbbf24; background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2); }
-
-        .action-btns { display: flex; gap: 8px; }
-        .btn-icon {
             background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
+            color: var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-weight: 700;
+            text-align: center;
         }
-        .btn-icon.edit:hover { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: #38bdf8; }
-        .btn-icon.delete:hover { background: rgba(239, 68, 68, 0.2); color: #ef4444; border-color: #ef4444; }
 
-        /* Toast */
+        th:nth-child(1), th:nth-child(2), th:nth-child(3) {
+            text-align: left;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        td:nth-child(1), td:nth-child(2), td:nth-child(3) {
+            text-align: left;
+        }
+
+        tr:hover td {
+            background: rgba(16, 185, 129, 0.04);
+        }
+
+        .badge-role {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--primary);
+        }
+
+        .status-present {
+            color: var(--present);
+            font-weight: 700;
+        }
+
+        .status-absent {
+            color: var(--absent);
+            font-weight: 700;
+        }
+
+        .status-coming {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        /* Toast Notification */
         #toastBox {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: var(--card-bg);
-            border: 1px solid #34d399;
+            border: 1px solid var(--primary);
             color: var(--text-color);
             padding: 14px 22px;
             border-radius: 14px;
@@ -404,339 +370,186 @@
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
-        #toastBox.show { transform: translateY(0); opacity: 1; }
-        #toastBox i { color: #34d399; font-size: 18px; }
+        #toastBox.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        #toastBox i {
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background: #020408;
+            color: #94a3b8;
+            padding: 40px 16px 25px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            font-size: 12px;
+            margin-top: 80px;
+        }
     </style>
 </head>
 <body>
 
     <div id="toastBox"><i class="fas fa-info-circle"></i> <span id="toastMsg">Action successful</span></div>
 
-    <!-- Admin Password Lock Modal -->
-    <div id="loginModal">
-        <div class="modal-card">
-            <h3><i class="fas fa-lock"></i> Admin Authentication</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Enter admin password to access the control panel & edit records.</p>
-            <form onsubmit="verifyAdminPassword(event)">
-                <input type="password" id="adminPasswordInput" class="form-control" placeholder="Enter password (default: cssc2026)" style="margin-bottom: 15px;" required>
-                <div style="display: flex; gap: 10px;">
-                    <button type="submit" class="btn-primary" style="flex: 1;">Unlock</button>
-                    <button type="button" class="btn-secondary" onclick="closeLoginModal()">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <!-- Header & Navigation -->
     <header>
         <div class="nav-content">
-            <a href="index.html" class="logo-area">
-                <div class="logo-badge">CSSC</div>
-                <div class="logo-text">
-                    <h1>CSSC</h1>
-                    <span>Collectorate School Science Club</span>
+            <a href="index.html" class="logo-title-area">
+                <div class="unique-logo"><i class="fas fa-atom"></i></div>
+                <div class="logo-text-box">
+                    <span class="logo-main-title">Karotoya Collectorate</span>
+                    <span class="logo-sub-title">Science Club</span>
                 </div>
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="rules.html">Rules & Constitution</a></li>
-                <li><a href="students.html">Student Details</a></li>
-                <li><a href="performance.html" class="active">Performance & Attendance</a></li>
-                <li><a href="#" class="admin-nav-btn" onclick="requestAdminAccess()"><i class="fas fa-lock" id="adminLockIcon"></i> Admin Dashboard</a></li>
+
+            <ul class="nav-links-right">
+                <div class="nav-desktop-links" style="display: flex; gap: 20px; align-items: center;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="students.html">Students</a></li>
+                    <li><a href="performance.html" class="active">Performance</a></li>
+                </div>
+                <li><button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button></li>
             </ul>
-            <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
         </div>
     </header>
 
     <div class="container">
         
-        <!-- Page Banner -->
-        <div class="page-banner">
-            <h2>Member Attendance & Performance Management</h2>
-            <p>Integrated with student database roster and secured via password-locked control panel.</p>
+        <div class="page-header">
+            <div class="school-subname">Karotoya Collectorate Adarsha Siksha Niketan Science Club</div>
+            <h2>Member Performance & 15-Day Attendance Tracker</h2>
+            <p>View-only attendance sheet. Present (P), Absent (A) and upcoming dates status.</p>
         </div>
 
-        <!-- Admin Control & Edit Panel (Locked by default) -->
-        <div class="admin-panel-box" id="adminPanel">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 id="formPanelTitle" style="margin: 0; color: #34d399;"><i class="fas fa-user-plus"></i> Add New Member Record</h3>
-                <button onclick="lockAdminPanel()" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12px;"><i class="fas fa-lock"></i> Lock Panel</button>
-            </div>
-            <form id="memberPerfForm" onsubmit="handleFormSubmit(event)">
-                <input type="hidden" id="editIndex" value="-1">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Member Name</label>
-                        <input type="text" id="inputName" class="form-control" placeholder="e.g. Ahanaf Abid" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Class / Role</label>
-                        <input type="text" id="inputRole" class="form-control" placeholder="e.g. Class 9 (Science)" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Attendance Status</label>
-                        <select id="inputAttendance" class="form-control" required>
-                            <option value="Present">Present</option>
-                            <option value="Late">Late</option>
-                            <option value="Absent">Absent</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Performance Grade</label>
-                        <select id="inputPerformance" class="form-control" required>
-                            <option value="Excellent">Excellent</option>
-                            <option value="Good">Good</option>
-                            <option value="Average">Average</option>
-                        </select>
-                    </div>
+        <!-- Main Tracker Card -->
+        <div class="card">
+            <div class="controls-row">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search student by name..." onkeyup="filterStudents()">
                 </div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary" id="submitBtn"><i class="fas fa-save"></i> Save Record</button>
-                    <button type="button" class="btn-secondary" id="cancelEditBtn" style="display: none;" onclick="resetForm()">Cancel Edit</button>
+                <div style="font-size: 13px; color: var(--text-muted);">
+                    <i class="fas fa-info-circle" style="color: var(--primary);"></i> Current active day tracker updated automatically.
                 </div>
-            </form>
-        </div>
-
-        <!-- Search & Filter Bar -->
-        <div class="filter-container">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchMember" placeholder="Search members by name..." onkeyup="renderTable()">
             </div>
-            <button onclick="syncStudentDatabase()" class="btn-secondary" style="font-size: 13px; display: flex; align-items: center; gap: 8px;"><i class="fas fa-sync"></i> Sync from Students Page</button>
-        </div>
 
-        <!-- Member Performance & Attendance Table -->
-        <div class="table-card">
-            <h3><i class="fas fa-clipboard-user"></i> Active Members Roster</h3>
-            <table id="memberTable">
-                <thead>
-                    <tr>
-                        <th>Member Name</th>
-                        <th>Class / Role</th>
-                        <th>Attendance Status</th>
-                        <th>Performance Score</th>
-                        <th id="actionsHeader" style="display: none;">Actions (Admin)</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody">
-                    <!-- Populated dynamically via JavaScript -->
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Student Name</th>
+                            <th>Role / Class</th>
+                            <!-- Dynamic 15 Days Headers -->
+                            <script>
+                                for(let d=1; d<=15; d++) {
+                                    document.write(`<th>Day ${d}</th>`);
+                                }
+                            </script>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTableBody">
+                        <!-- Student Rows injected dynamically -->
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>
 
-    <script>
-        // Shared LocalStorage Key used across student database pages
-        const STORAGE_KEY = 'cssc_members_data';
-        const ADMIN_SESSION_KEY = 'cssc_admin_unlocked';
+    <footer>
+        <p>&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</p>
+    </footer>
 
-        // Default initial data if empty
-        let membersData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
-            { name: "Ahanaf Abid Omlan", role: "Class 9 (Science)", attendance: "Present", performance: "Excellent" },
-            { name: "Tanvir Ahmed", role: "Class 9 (Science)", attendance: "Present", performance: "Good" },
-            { name: "Sadia Islam", role: "Class 8", attendance: "Late", performance: "Average" },
-            { name: "Raihan Hossain", role: "Class 9 (Science)", attendance: "Absent", performance: "Good" }
+    <script>
+        // SET CURRENT ACTIVE DAY: Jehetu ekhon dhoro 5ti class/din sesh hoyeche, tai 6 theke 15 porjonto "Coming" dekhabe. (Tumi nijer moto kore eta change korte parbe)
+        const currentActiveDay = 0; 
+
+        // STUDENT DATA (100+ student supportable array)
+        const clubStudentsData = [
+            { id: 1, name: "Tanvir Ahmed", role: "President", attendance: ["P","P","A","P","P"] },
+            { id: 2, name: "Sumaiya Akter", role: "Secretary", attendance: ["P","P","P","P","A"] },
+            { id: 3, name: "Rahat Hossain", role: "Member", attendance: ["A","P","P","P","P"] },
+            { id: 4, name: "Nusrat Jahan", role: "Member", attendance: ["P","A","P","P","P"] },
+            { id: 5, name: "Fahim Faisal", role: "Member", attendance: ["P","P","P","A","P"] },
+            { id: 6, name: "Sadia Afrin", role: "Member", attendance: ["P","P","P","P","P"] },
+            { id: 7, name: "Mehedi Hasan", role: "Member", attendance: ["P","A","P","P","P"] },
+            { id: 8, name: "Tasnia Tabassum", role: "Member", attendance: ["P","P","A","P","P"] },
+            { id: 9, name: "Ashikur Rahman", role: "Member", attendance: ["A","P","P","P","A"] },
+            { id: 10, name: "Zannatul Ferdous", role: "Member", attendance: ["P","P","P","P","P"] }
         ];
 
-        window.onload = function() {
-            renderTable();
-            checkAdminSession();
-        };
-
-        // Theme Toggle Logic
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('cssc_theme', newTheme);
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toastBox');
-            document.getElementById('toastMsg').innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3000);
-        }
-
-        // --- Password Lock System ---
-        function requestAdminAccess() {
-            const isUnlocked = sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
-            if (isUnlocked) {
-                toggleAdminPanelDirect();
-            } else {
-                document.getElementById('loginModal').style.display = 'flex';
-                document.getElementById('adminPasswordInput').focus();
-            }
-        }
-
-        function closeLoginModal() {
-            document.getElementById('loginModal').style.display = 'none';
-            document.getElementById('adminPasswordInput').value = '';
-        }
-
-        function verifyAdminPassword(event) {
-            event.preventDefault();
-            const pass = document.getElementById('adminPasswordInput').value;
-            // Default Admin Password is set to 'cssc2026'
-            if (pass === 'cssc2026') {
-                sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
-                closeLoginModal();
-                toggleAdminPanelDirect();
-                showToast("Admin Access Granted!");
-            } else {
-                showToast("Incorrect Password! Access Denied.");
-                document.getElementById('adminPasswordInput').value = '';
-            }
-        }
-
-        function checkAdminSession() {
-            const isUnlocked = sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
-            if (isUnlocked) {
-                document.getElementById('adminPanel').style.display = 'block';
-                document.getElementById('adminLockIcon').className = 'fas fa-unlock';
-                document.getElementById('actionsHeader').style.display = '';
-            }
-        }
-
-        function toggleAdminPanelDirect() {
-            const panel = document.getElementById('adminPanel');
-            const lockIcon = document.getElementById('adminLockIcon');
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
-                lockIcon.className = 'fas fa-lock';
-                sessionStorage.removeItem(ADMIN_SESSION_KEY);
-                showToast("Admin Panel Locked");
-            } else {
-                panel.style.display = 'block';
-                lockIcon.className = 'fas fa-unlock';
-                sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
-                panel.scrollIntoView({ behavior: 'smooth' });
-                showToast("Admin Dashboard Unlocked");
-            }
-            renderTable();
-        }
-
-        function lockAdminPanel() {
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('adminLockIcon').className = 'fas fa-lock';
-            sessionStorage.removeItem(ADMIN_SESSION_KEY);
-            showToast("Admin Panel Locked");
-            renderTable();
-        }
-
-        // --- Auto-Sync from Student Details HTML Page or Shared Storage ---
-        function syncStudentDatabase() {
-            // If students.html updates a shared list or saves new students to storage, this pulls them in automatically
-            const latestData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || membersData;
-            membersData = latestData;
-            renderTable();
-            showToast("Successfully synchronized with Student Database!");
-        }
-
-        // --- Render Table ---
-        function renderTable() {
-            const searchInput = document.getElementById('searchMember').value.toLowerCase();
-            const tbody = document.getElementById('tableBody');
-            const isUnlocked = sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
-            
-            document.getElementById('actionsHeader').style.display = isUnlocked ? '' : 'none';
+        function renderTable(filterText = "") {
+            const tbody = document.getElementById('attendanceTableBody');
             tbody.innerHTML = '';
 
-            membersData.forEach((member, index) => {
-                if (member.name.toLowerCase().includes(searchInput)) {
-                    let badgeClass = 'status-present';
-                    if (member.attendance === 'Absent') badgeClass = 'status-absent';
-                    if (member.attendance === 'Late') badgeClass = 'status-late';
+            const filtered = clubStudentsData.filter(s => s.name.toLowerCase().includes(filterText.toLowerCase()));
 
-                    let perfClass = 'rating-good';
-                    if (member.performance === 'Excellent') perfClass = 'rating-excellent';
-                    if (member.performance === 'Average') perfClass = 'rating-average';
+            if(filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="18" style="text-align: center; color: var(--text-muted); padding: 30px;">No students found matching your search.</td></tr>`;
+                return;
+            }
 
-                    const row = document.createElement('tr');
-                    let actionHtml = '';
-                    if (isUnlocked) {
-                        actionHtml = `
-                            <td>
-                                <div class="action-btns">
-                                    <button class="btn-icon edit" onclick="editMember(${index})" title="Edit Record"><i class="fas fa-edit"></i></button>
-                                    <button class="btn-icon delete" onclick="deleteMember(${index})" title="Delete Record"><i class="fas fa-trash-alt"></i></button>
-                                </div>
-                            </td>
-                        `;
+            filtered.forEach((student, index) => {
+                let row = `<tr>
+                    <td>${student.id || index + 1}</td>
+                    <td><strong>${student.name}</strong></td>
+                    <td><span class="badge-role">${student.role}</span></td>`;
+                
+                for(let d=1; d<=15; d++) {
+                    let cellContent = "";
+                    
+                    if (d > currentActiveDay) {
+                        // Future days where date/class has not arrived yet
+                        cellContent = `<span class="status-coming">Coming</span>`;
+                    } else {
+                        // Get attendance status for past/current days (Default to 'P' if not specified)
+                        let st = (student.attendance && student.attendance[d-1]) ? student.attendance[d-1] : 'P';
+                        
+                        if(st === 'P') {
+                            cellContent = `<span class="status-present"><i class="fas fa-check"></i> P</span>`;
+                        } else if(st === 'A') {
+                            cellContent = `<span class="status-absent"><i class="fas fa-times"></i> A</span>`;
+                        } else {
+                            cellContent = `-`;
+                        }
                     }
-
-                    row.innerHTML = `
-                        <td><strong>${member.name}</strong></td>
-                        <td>${member.role}</td>
-                        <td><span class="status-badge ${badgeClass}">${member.attendance}</span></td>
-                        <td><span class="perf-rating ${perfClass}">${member.performance}</span></td>
-                        ${actionHtml}
-                    `;
-                    tbody.appendChild(row);
+                    
+                    row += `<td>${cellContent}</td>`;
                 }
+                row += `</tr>`;
+                tbody.innerHTML += row;
             });
         }
 
-        // --- Form Handling & Persistence ---
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const editIndex = parseInt(document.getElementById('editIndex').value);
-            const name = document.getElementById('inputName').value.trim();
-            const role = document.getElementById('inputRole').value.trim();
-            const attendance = document.getElementById('inputAttendance').value;
-            const performance = document.getElementById('inputPerformance').value;
-
-            if (!name || !role) return;
-
-            if (editIndex === -1) {
-                membersData.unshift({ name, role, attendance, performance });
-                showToast("New member record added successfully!");
-            } else {
-                membersData[editIndex] = { name, role, attendance, performance };
-                showToast("Member record updated successfully!");
-                resetForm();
-            }
-
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(membersData));
-            renderTable();
-            document.getElementById('memberPerfForm').reset();
+        function filterStudents() {
+            const query = document.getElementById('searchInput').value;
+            renderTable(query);
         }
 
-        function editMember(index) {
-            const member = membersData[index];
-            document.getElementById('editIndex').value = index;
-            document.getElementById('inputName').value = member.name;
-            document.getElementById('inputRole').value = member.role;
-            document.getElementById('inputAttendance').value = member.attendance;
-            document.getElementById('inputPerformance').value = member.performance;
-
-            document.getElementById('formPanelTitle').innerHTML = `<i class="fas fa-user-edit"></i> Edit Member Record (#${index + 1})`;
-            document.getElementById('submitBtn').innerHTML = `<i class="fas fa-sync-alt"></i> Update Record`;
-            document.getElementById('cancelEditBtn').style.display = 'inline-block';
-
-            document.getElementById('adminPanel').style.display = 'block';
-            document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
-            showToast("Loaded record for editing");
+        function showToast(msg) {
+            const toast = document.getElementById('toastBox');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        function resetForm() {
-            document.getElementById('memberPerfForm').reset();
-            document.getElementById('editIndex').value = "-1";
-            document.getElementById('formPanelTitle').innerHTML = `<i class="fas fa-user-plus"></i> Add New Member Record`;
-            document.getElementById('submitBtn').innerHTML = `<i class="fas fa-save"></i> Save Record`;
-            document.getElementById('cancelEditBtn').style.display = 'none';
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('cssc_theme', next);
+            showToast(`Switched to ${next} mode`);
         }
 
-        function deleteMember(index) {
-            if (confirm(`Are you sure you want to delete ${membersData[index].name}'s record?`)) {
-                membersData.splice(index, 1);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(membersData));
-                renderTable();
-                showToast("Member record deleted!");
-            }
-        }
+        // Initial render
+        renderTable();
     </script>
 </body>
 </html>
