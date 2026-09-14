@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details - CSSC (Collectorate School Science Club)</title>
+    <title>Students Directory - Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
     
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,38 +17,80 @@
 
     <style>
         :root {
-            --bg-color: #050811;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --bg-color: #030712;
+            --card-bg: rgba(17, 24, 39, 0.7);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --primary: #10b981;
+            --primary-glow: rgba(16, 185, 129, 0.5);
+            --primary-hover: #059669;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(3, 7, 18, 0.9);
             --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
-            --accent-glow: rgba(16, 185, 129, 0.25);
             --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
         }
+
         [data-theme="light"] {
-            --bg-color: #f1f5f9;
+            --bg-color: #f8fafc;
             --card-bg: rgba(255, 255, 255, 0.85);
             --text-color: #0f172a;
             --text-muted: #64748b;
+            --primary: #059669;
+            --primary-glow: rgba(5, 150, 105, 0.3);
+            --primary-hover: #047857;
             --border-color: rgba(0, 0, 0, 0.08);
-            --accent-glow: rgba(16, 185, 129, 0.15);
+            --nav-bg: rgba(248, 250, 252, 0.9);
+            --primary-grad: linear-gradient(135deg, #059669, #0891b2);
             --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
         }
 
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            transition: background 0.4s ease, color 0.4s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 130px 20px 40px 20px;
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+            width: 100%;
+            animation: pageEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes pageEntrance {
+            0% {
+                opacity: 0;
+                transform: scale(0.97) translateY(15px);
+                filter: brightness(1.5) blur(4px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: brightness(1) blur(0px);
+            }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -250px;
+            left: -250px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 75%);
+            z-index: -1;
+            filter: blur(90px);
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(200px, 250px) scale(1.1); }
         }
 
         header {
@@ -56,120 +98,130 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--card-bg);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
-            z-index: 1000;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 14px 0;
-            box-shadow: var(--shadow);
+            z-index: 999;
+            padding: 10px 4%;
         }
+
         .nav-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 20px;
         }
-        .logo-area {
+
+        .logo-title-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
-            color: var(--text-color);
         }
-        .logo-badge {
-            background: var(--primary-grad);
-            color: white;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
+
+        .unique-logo {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #10b981, #047857);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 0 0 20px var(--accent-glow);
+            position: relative;
+            box-shadow: 0 0 15px var(--primary-glow);
+            border: 1px solid rgba(255,255,255,0.25);
+            flex-shrink: 0;
         }
-        .logo-text h1 {
-            margin: 0;
+        .unique-logo i {
+            color: #fff;
             font-size: 16px;
-            letter-spacing: 0.3px;
-        }
-        .logo-text span {
-            font-size: 11px;
-            color: #34d399;
-            font-weight: 600;
-            text-transform: uppercase;
         }
 
-        .nav-links {
+        .logo-text-box {
             display: flex;
-            gap: 20px;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .nav-links li a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links li a:hover, .nav-links li a.active {
-            color: #34d399;
+            flex-direction: column;
         }
 
-        .admin-nav-btn {
-            background: rgba(52, 211, 153, 0.15);
-            color: #34d399 !important;
-            border: 1px dashed #34d399;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-size: 13px !important;
-            cursor: pointer;
-            transition: all 0.2s;
+        .logo-main-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-color);
+            line-height: 1.2;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-        .admin-nav-btn:hover {
-            background: rgba(52, 211, 153, 0.25);
+
+        .logo-sub-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links-right {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links-right a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .nav-links-right a:hover, .nav-links-right a.active {
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         .theme-btn {
             background: var(--card-bg);
-            color: var(--text-color);
             border: 1px solid var(--border-color);
-            padding: 9px 14px;
-            border-radius: 12px;
+            color: var(--text-color);
+            padding: 6px 10px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 15px;
-            transition: transform 0.2s;
+            font-size: 13px;
+            transition: all 0.3s;
         }
         .theme-btn:hover {
-            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 130px 20px 60px 20px;
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         .page-header h2 {
-            font-size: 32px;
-            margin: 0 0 8px 0;
+            font-size: clamp(26px, 4vw, 34px);
+            margin: 0 0 10px 0;
             background: var(--primary-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
         .page-header .school-subname {
-            font-size: 15px;
-            color: #34d399;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 12px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
         .page-header p {
             color: var(--text-muted);
@@ -178,21 +230,16 @@
         }
 
         .filter-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            gap: 15px;
-            flex-wrap: wrap;
+            margin-bottom: 35px;
         }
         .search-box {
-            flex: 1;
-            min-width: 250px;
             position: relative;
+            max-width: 450px;
+            margin: 0 auto;
         }
         .search-box i {
             position: absolute;
-            left: 16px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
@@ -202,84 +249,52 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 12px 16px 12px 45px;
+            padding: 14px 18px 14px 48px;
             border-radius: 14px;
             font-size: 14px;
             outline: none;
             box-sizing: border-box;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            transition: border-color 0.3s;
         }
-
-        .admin-panel-box {
-            display: none;
-            border: 2px dashed #34d399;
-            padding: 25px;
-            border-radius: 20px;
-            background: rgba(52, 211, 153, 0.03);
-            margin-bottom: 30px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr) auto;
-            gap: 12px;
-            align-items: flex-end;
-        }
-        @media(max-width: 900px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .form-group label {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .form-control {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-size: 13px;
-            outline: none;
-        }
-        .btn-primary {
-            background: var(--primary-grad);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            height: 41px;
-            box-shadow: 0 4px 15px var(--accent-glow);
+        .search-input:focus {
+            border-color: var(--primary);
         }
 
         .members-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 22px;
         }
+        
         @media(max-width: 900px) {
-            .members-grid { grid-template-columns: 1fr; }
+            .members-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
+        @media(max-width: 600px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .member-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             border-radius: 20px;
-            padding: 20px;
+            padding: 22px;
             box-shadow: var(--shadow);
             position: relative;
-            transition: transform 0.2s;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .member-card:hover {
             transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 15px 35px var(--primary-glow);
         }
+
         .member-header {
             display: flex;
             align-items: center;
@@ -296,51 +311,37 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 0 15px var(--accent-glow);
+            font-size: 16px;
+            box-shadow: 0 0 15px var(--primary-glow);
+            flex-shrink: 0;
         }
         .member-info h3 {
-            margin: 0 0 3px 0;
+            margin: 0 0 4px 0;
             font-size: 16px;
+            color: var(--text-color);
         }
         .member-info p {
             margin: 0;
             font-size: 12px;
-            color: #34d399;
-            font-weight: 600;
+            color: var(--primary);
+            font-weight: 700;
         }
+
         .member-details {
             font-size: 13px;
             color: var(--text-muted);
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             border-top: 1px solid var(--border-color);
-            padding-top: 12px;
+            padding-top: 14px;
         }
         .member-details div {
             display: flex;
             justify-content: space-between;
         }
-        .delete-btn-absolute {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .delete-btn-absolute:hover {
-            background: #ef4444;
-            color: white;
+        .member-details strong {
+            color: var(--text-color);
         }
 
         #toastBox {
@@ -348,7 +349,7 @@
             bottom: 30px;
             right: 30px;
             background: var(--card-bg);
-            border: 1px solid #34d399;
+            border: 1px solid var(--primary);
             color: var(--text-color);
             padding: 14px 22px;
             border-radius: 14px;
@@ -367,18 +368,18 @@
             opacity: 1;
         }
         #toastBox i {
-            color: #34d399;
+            color: var(--primary);
             font-size: 18px;
         }
 
         footer {
-            background-color: #030408;
+            background: #020408;
             color: #94a3b8;
-            padding: 40px 20px 20px;
+            padding: 40px 16px 25px;
             border-top: 1px solid var(--border-color);
-            margin-top: 80px;
             text-align: center;
             font-size: 12px;
+            margin-top: 80px;
         }
     </style>
 </head>
@@ -389,67 +390,39 @@
     <!-- Header & Navigation -->
     <header>
         <div class="nav-content">
-            <a href="index.html" class="logo-area">
-                <div class="logo-badge">CSSC</div>
-                <div class="logo-text">
-                    <h1>Collectorate School Science Club</h1>
-                    <span>Official Directory</span>
+            <a href="index.html" class="logo-title-area">
+                <div class="unique-logo"><i class="fas fa-atom"></i></div>
+                <div class="logo-text-box">
+                    <span class="logo-main-title">Karotoya Collectorate</span>
+                    <span class="logo-sub-title">Science Club</span>
                 </div>
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="rules.html">Rules & Constitution</a></li>
-                <li><a href="students.html" class="active">Student Details</a></li>
-                <li><a href="performance.html">Performance</a></li>
-                <li><a href="#" class="admin-nav-btn" onclick="toggleAdminPanel()"><i class="fas fa-lock" id="adminLockIcon"></i> Admin Control</a></li>
+
+            <ul class="nav-links-right">
+                <div class="nav-desktop-links" style="display: flex; gap: 20px; align-items: center;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="rules.html">Rules</a></li>
+                    <li><a href="students.html" class="active">Students</a></li>
+                    <li><a href="performance.html">Performance</a></li>
+                </div>
+                <li><button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button></li>
             </ul>
-            <button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
         </div>
     </header>
 
     <div class="container">
         
         <div class="page-header">
-            <div class="school-subname">CSSC • Collectorate School Science Club</div>
-            <h2>Club Members Directory</h2>
-            <p>Official list of registered active members and student coordinators</p>
+            <div class="school-subname">Karotoya Collectorate Adarsha Siksha Niketan Science Club</div>
+            <h2>ক্লাব সদস্য  তালিকা (Students Directory)</h2>
         </div>
-
-        <!-- Admin Control Panel to Add New Members -->
-        <section id="adminPanel" class="admin-panel-box">
-            <h3 style="margin-top:0; color:#34d399; font-size:16px; display:flex; align-items:center; gap:8px;">
-                <i class="fas fa-user-plus"></i> Add New Member (Admin Mode)
-            </h3>
-            <form onsubmit="addNewMember(event)">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="inputName" class="form-control" placeholder="e.g. Rafid Ahmed" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Class & Roll</label>
-                        <input type="text" id="inputClass" class="form-control" placeholder="Class 9 • Roll 05" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Club Role / Title</label>
-                        <input type="text" id="inputRole" class="form-control" placeholder="Member / Coordinator" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone / Email</label>
-                        <input type="text" id="inputContact" class="form-control" placeholder="017xxxxxxxx" required>
-                    </div>
-                    <div>
-                        <button type="submit" class="btn-primary"><i class="fas fa-plus"></i> Add</button>
-                    </div>
-                </div>
-            </form>
-        </section>
 
         <!-- Search Bar -->
         <div class="filter-bar">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search member by name, roll, or role..." onkeyup="filterMembers()">
+                <input type="text" id="searchInput" class="search-input" placeholder="ক্লাব রোল, নাম, ক্লাস বা সেকশন দিয়ে খুঁজুন..." onkeyup="filterMembers()">
             </div>
         </div>
 
@@ -459,24 +432,90 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 CSSC (Collectorate School Science Club). All rights reserved.</p>
+        <p>&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</p>
     </footer>
 
     <script>
-        let isAdmin = false;
-        const ADMIN_PASSWORD = "omlan123";
-
-        let membersList = [
-            { name: "Ahanaf Abid Omlan", classRoll: "Class 9 • Roll 01", role: "President", contact: "01724035478" },
-            { name: "General Secretary", classRoll: "Class 9 • Roll 02", role: "General Secretary", contact: "Active Member" },
-            { name: "Treasurer Lead", classRoll: "Class 9 • Roll 03", role: "Treasurer", contact: "Active Member" },
-            { name: "Nazifa Tabassum", classRoll: "Class 8 • Roll 12", role: "Science Researcher", contact: "Active Member" },
-            { name: "Tanvir Rahman", classRoll: "Class 9 • Roll 08", role: "Robotics Lead", contact: "Active Member" }
+        /* 
+           ===================================================================
+           💡 এখানে আপনি `clubRoll: "101"` থেকে শুরু করে পর্যায়ক্রমে ২০০+ শিক্ষার্থীর 
+           ক্লাব রোল, নাম, ক্লাস, সেকশন ও ক্লাস রোল বসিয়ে নিতে পারবেন।
+           ===================================================================
+        */
+        const membersList = [
+            { clubRoll: "101", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "01", role: "President" },
+            { clubRoll: "102", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "02", role: "General Secretary" },
+            { clubRoll: "103", name: "aaa", class: "Class 8", section: "B", classRoll: "05", role: "Treasurer" },
+            { clubRoll: "104", name: "aaa", class: "Class 9", section: "Science-B", classRoll: "12", role: "Science Researcher" },
+            { clubRoll: "105", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "15", role: "Robotics Lead" },
+            { clubRoll: "106", name: "aaa", class: "Class 8", section: "A", classRoll: "08", role: "Executive Member" },
+            { clubRoll: "107", name: "aaa", class: "Class 9", section: "Science-B", classRoll: "20", role: "General Member" },
+            { clubRoll: "108", name: "aaa", class: "Class 8", section: "C", classRoll: "11", role: "General Member" },
+            { clubRoll: "109", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "110", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "111", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "112", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "113", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "114", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "115", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "116", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "117", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "118", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "119", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "120", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "121", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "122", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "123", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "124", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "125", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "126", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "127", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "128", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "129", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "130", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "131", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "132", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "133", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "134", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "135", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "136", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "137", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "138", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "139", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "140", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "141", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "142", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "143", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "144", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "145", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "146", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "147", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "148", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "149", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "150", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "151", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "152", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "153", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "154", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "155", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "156", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "157", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "158", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "159", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "160", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "161", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "162", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "163", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "164", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "165", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "166", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "167", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "168", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" },
+            { clubRoll: "169", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "25", role: "General Member" }
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadMembers();
-            filterMembers();
+            renderMembers(membersList);
         });
 
         function showToast(msg) {
@@ -494,58 +533,21 @@
             showToast(`Switched to ${next} mode`);
         }
 
-        function toggleAdminPanel() {
-            if (!isAdmin) {
-                let enteredPass = prompt("Enter Admin Password:");
-                if (enteredPass === null) return;
-                
-                if (enteredPass !== ADMIN_PASSWORD) {
-                    showToast("Incorrect Password! Access Denied.");
-                    return;
-                }
-            }
-
-            isAdmin = !isAdmin;
-            const panel = document.getElementById('adminPanel');
-            const icon = document.getElementById('adminLockIcon');
-            
-            panel.style.display = isAdmin ? 'block' : 'none';
-            icon.className = isAdmin ? 'fas fa-unlock' : 'fas fa-lock';
-            
-            filterMembers(); 
-            showToast(isAdmin ? 'Admin Control Unlocked' : 'Admin Control Locked');
-        }
-
-        function loadMembers() {
-            const saved = localStorage.getItem('cssc_members_directory');
-            if (saved) {
-                try { membersList = JSON.parse(saved); } catch(e) {}
-            }
-        }
-
-        function saveMembers() {
-            localStorage.setItem('cssc_members_directory', JSON.stringify(membersList));
-        }
-
         function renderMembers(list) {
             const container = document.getElementById('membersContainer');
             container.innerHTML = '';
 
             if (list.length === 0) {
-                container.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">No members found.</p>`;
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">কোনো শিক্ষার্থী খুঁজে পাওয়া যায়নি।</p>`;
                 return;
             }
 
             list.forEach((m) => {
-                const originalIndex = membersList.findIndex(item => item.name === m.name && item.classRoll === m.classRoll);
                 const initials = m.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
                 
                 const card = document.createElement('div');
                 card.className = 'member-card';
                 card.innerHTML = `
-                    <button class="delete-btn-absolute" style="display: ${isAdmin ? 'flex' : 'none'};" onclick="deleteMember(${originalIndex})" title="Remove Member">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
                     <div class="member-header">
                         <div class="member-avatar">${initials}</div>
                         <div class="member-info">
@@ -554,46 +556,23 @@
                         </div>
                     </div>
                     <div class="member-details">
-                        <div><span>Class & Roll:</span> <strong>${m.classRoll}</strong></div>
-                        <div><span>Contact Info:</span> <strong>${m.contact}</strong></div>
+                        <div><span>Club Roll:</span> <strong style="color: var(--primary);">#${m.clubRoll}</strong></div>
+                        <div><span>Class:</span> <strong>${m.class}</strong></div>
+                        <div><span>Section:</span> <strong>${m.section}</strong></div>
+                        <div><span>Class Roll:</span> <strong>${m.classRoll}</strong></div>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        function addNewMember(e) {
-            e.preventDefault();
-            const name = document.getElementById('inputName').value;
-            const classRoll = document.getElementById('inputClass').value;
-            const role = document.getElementById('inputRole').value;
-            const contact = document.getElementById('inputContact').value;
-
-            membersList.push({ name, classRoll, role, contact });
-            saveMembers();
-            filterMembers();
-
-            document.getElementById('inputName').value = '';
-            document.getElementById('inputClass').value = '';
-            document.getElementById('inputRole').value = '';
-            document.getElementById('inputContact').value = '';
-
-            showToast('New member added successfully!');
-        }
-
-        function deleteMember(index) {
-            if (confirm('Are you sure you want to remove this member?')) {
-                membersList.splice(index, 1);
-                saveMembers();
-                filterMembers();
-                showToast('Member removed successfully!');
-            }
-        }
-
         function filterMembers() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const filtered = membersList.filter(m => 
+                m.clubRoll.toLowerCase().includes(query) || 
                 m.name.toLowerCase().includes(query) || 
+                m.class.toLowerCase().includes(query) || 
+                m.section.toLowerCase().includes(query) || 
                 m.classRoll.toLowerCase().includes(query) || 
                 m.role.toLowerCase().includes(query)
             );
