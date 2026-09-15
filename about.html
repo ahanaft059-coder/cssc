@@ -178,7 +178,6 @@
             padding-bottom: 4px;
         }
 
-        /* Bluish Glow Hover Line Effect */
         .nav-desktop-links a::after {
             content: '';
             position: absolute;
@@ -320,6 +319,10 @@
             .nav-desktop-links {
                 display: none;
             }
+            .footer-content {
+                grid-template-columns: 1fr !important;
+                gap: 30px;
+            }
         }
 
         .mv-box {
@@ -390,14 +393,106 @@
             font-size: 18px;
         }
 
+        /* Footer Styles */
         footer {
             background: #020408;
             color: var(--text-muted);
-            padding: 40px 16px;
+            padding: 60px 5% 30px 5%;
             border-top: 1px solid var(--border-color);
-            text-align: center;
-            font-size: 13px;
             margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-col h4 {
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-col h4 i {
+            color: var(--primary);
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-socials a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            background: var(--primary);
+            color: #030712;
+            border-color: var(--primary);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            max-width: 1300px;
+            margin: 30px auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media(max-width: 768px) {
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -467,8 +562,36 @@
 
     </div>
 
+    <!-- Updated Footer matching design -->
     <footer>
-        <p>&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4><i class="fas fa-atom"></i> Science Club</h4>
+                <p>Karotoya Collectorate Adarsha Siksha Niketan Science Club.<br>Nurturing logical thinkers, innovators, and future scientists.</p>
+                <div class="footer-socials">
+                    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:scienceclub.kcasn@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home Dashboard</a></li>
+                    <li><a href="rules.html">Rules & Regulations</a></li>
+                    <li><a href="students.html">Registered Students</a></li>
+                    <li><a href="performance.html">Performance & Awards</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p>Karotoya Collectorate Adarsha Siksha Niketan, Rangpur Division, Bangladesh.</p>
+                <p>Email: scienceclub.kcasn@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
