@@ -7,6 +7,8 @@
     
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         (function () {
@@ -17,38 +19,40 @@
 
     <style>
         :root {
-            --bg-color: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #10b981;
-            --primary-glow: rgba(16, 185, 129, 0.5);
-            --primary-hover: #059669;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --nav-bg: rgba(3, 7, 18, 0.9);
-            --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
-            --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+            --bg-color: #070d19;
+            --card-bg: rgba(15, 25, 45, 0.6);
+            --card-hover-bg: rgba(22, 38, 68, 0.75);
+            --text-color: #e2e8f0;
+            --text-muted: #93c5fd;
+            --primary: #60a5fa;
+            --primary-glow: rgba(96, 165, 250, 0.25);
+            --primary-hover: #3b82f6;
+            --border-color: rgba(96, 165, 250, 0.12);
+            --nav-bg: rgba(7, 13, 25, 0.75);
+            --primary-grad: linear-gradient(135deg, #60a5fa 0%, #38bdf8 100%);
+            --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
         }
 
         [data-theme="light"] {
-            --bg-color: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.85);
-            --text-color: #0f172a;
+            --bg-color: #f4f8ff;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-hover-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1e293b;
             --text-muted: #64748b;
-            --primary: #059669;
-            --primary-glow: rgba(5, 150, 105, 0.3);
-            --primary-hover: #047857;
-            --border-color: rgba(0, 0, 0, 0.08);
-            --nav-bg: rgba(248, 250, 252, 0.9);
-            --primary-grad: linear-gradient(135deg, #059669, #0891b2);
-            --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            --primary-hover: #2563eb;
+            --border-color: rgba(59, 130, 246, 0.15);
+            --nav-bg: rgba(244, 248, 255, 0.75);
+            --primary-grad: linear-gradient(135deg, #3b82f6 0%, #0ea5e9 100%);
+            --shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.08);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -59,50 +63,60 @@
             transition: background 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
             width: 100%;
-            animation: pageEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: pageEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes pageEntrance {
-            0% {
-                opacity: 0;
-                transform: scale(0.97) translateY(15px);
-                filter: brightness(1.5) blur(4px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: brightness(1) blur(0px);
-            }
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
-        body::before {
+        /* Subtle Background Glow Elements */
+        body::before, body::after {
             content: '';
             position: fixed;
-            top: -250px;
-            left: -250px;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 75%);
+            border-radius: 50%;
             z-index: -1;
-            filter: blur(90px);
-            animation: floatGlow 12s infinite alternate ease-in-out;
+            filter: blur(140px);
+            opacity: 0.35;
+            pointer-events: none;
+        }
+        body::before {
+            top: -250px;
+            left: -250px;
+            background: rgba(96, 165, 250, 0.2);
+            animation: floatGlow1 18s infinite alternate ease-in-out;
+        }
+        body::after {
+            bottom: -250px;
+            right: -250px;
+            background: rgba(56, 189, 248, 0.15);
+            animation: floatGlow2 18s infinite alternate ease-in-out;
         }
 
-        @keyframes floatGlow {
+        @keyframes floatGlow1 {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(200px, 250px) scale(1.1); }
+            100% { transform: translate(120px, 120px) scale(1.1); }
+        }
+        @keyframes floatGlow2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-120px, -120px) scale(1.1); }
         }
 
+        /* Header & Nav */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             background: var(--nav-bg);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--border-color);
             z-index: 999;
-            padding: 10px 4%;
+            padding: 14px 5%;
         }
 
         .nav-content {
@@ -116,26 +130,24 @@
         .logo-title-area {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
         }
 
         .unique-logo {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #10b981, #047857);
-            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            background: var(--primary-grad);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            box-shadow: 0 0 15px var(--primary-glow);
-            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 8px 25px var(--primary-glow);
             flex-shrink: 0;
         }
         .unique-logo i {
             color: #fff;
-            font-size: 16px;
+            font-size: 18px;
         }
 
         .logo-text-box {
@@ -144,14 +156,10 @@
         }
 
         .logo-main-title {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 800;
             color: var(--text-color);
-            line-height: 1.2;
-            max-width: 220px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            letter-spacing: -0.2px;
         }
 
         .logo-sub-title {
@@ -159,172 +167,235 @@
             font-weight: 700;
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1.2px;
         }
 
         .nav-links-right {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 24px;
             align-items: center;
         }
 
-        .nav-links-right a {
+        .nav-desktop-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        /* Advanced Bluish Line Animation on Nav Hover */
+        .nav-desktop-links a {
             text-decoration: none;
             color: var(--text-muted);
             font-weight: 600;
             font-size: 14px;
-            transition: color 0.3s, transform 0.2s;
+            position: relative;
+            padding: 6px 2px;
+            transition: color 0.3s ease;
         }
 
-        .nav-links-right a:hover, .nav-links-right a.active {
+        .nav-desktop-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2.5px;
+            background: var(--primary-grad);
+            box-shadow: 0 0 12px var(--primary);
+            transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 4px;
+        }
+
+        .nav-desktop-links a:hover, 
+        .nav-desktop-links a.active {
             color: var(--primary);
-            transform: translateY(-2px);
+        }
+
+        .nav-desktop-links a:hover::after, 
+        .nav-desktop-links a.active::after {
+            width: 100%;
         }
 
         .theme-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 6px 10px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
         .theme-btn:hover {
             border-color: var(--primary);
-            box-shadow: 0 0 10px var(--primary-glow);
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: translateY(-2px);
         }
 
+        /* Container & Header */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 130px 20px 60px 20px;
+            padding: 150px 20px 60px 20px;
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 35px;
-        }
-        .page-header h2 {
-            font-size: clamp(26px, 4vw, 34px);
-            margin: 0 0 10px 0;
-            background: var(--primary-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
+            margin-bottom: 50px;
         }
         .page-header .school-subname {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--primary);
             font-weight: 700;
             margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2.5px;
         }
-        .page-header p {
-            color: var(--text-muted);
-            font-size: 14px;
+        .page-header h2 {
+            font-size: clamp(28px, 4vw, 36px);
             margin: 0;
+            background: var(--primary-grad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
+        /* Search Bar */
         .filter-bar {
-            margin-bottom: 35px;
+            margin-bottom: 50px;
         }
         .search-box {
             position: relative;
-            max-width: 450px;
+            max-width: 520px;
             margin: 0 auto;
         }
         .search-box i {
             position: absolute;
-            left: 18px;
+            left: 22px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
+            color: var(--primary);
+            font-size: 15px;
         }
         .search-input {
             width: 100%;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 14px 18px 14px 48px;
-            border-radius: 14px;
+            padding: 16px 20px 16px 54px;
+            border-radius: 18px;
             font-size: 14px;
+            font-weight: 500;
             outline: none;
-            box-sizing: border-box;
             box-shadow: var(--shadow);
-            backdrop-filter: blur(12px);
-            transition: border-color 0.3s;
+            backdrop-filter: blur(20px);
+            transition: all 0.35s ease;
         }
         .search-input:focus {
             border-color: var(--primary);
+            box-shadow: 0 0 30px var(--primary-glow);
+            background: var(--card-hover-bg);
         }
 
+        /* Members Grid */
         .members-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
+            gap: 24px;
         }
         
-        @media(max-width: 900px) {
+        @media(max-width: 992px) {
             .members-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        @media(max-width: 600px) {
+        @media(max-width: 650px) {
             .members-grid {
                 grid-template-columns: 1fr;
             }
+            .nav-desktop-links {
+                display: none;
+            }
         }
 
+        /* Unique Member Card Design */
         .member-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(16px);
-            border-radius: 20px;
-            padding: 22px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 22px;
+            padding: 24px;
             box-shadow: var(--shadow);
             position: relative;
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-grad);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
         .member-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 15px 35px var(--primary-glow);
+            transform: translateY(-8px);
+            background: var(--card-hover-bg);
+            border-color: rgba(96, 165, 250, 0.3);
+            box-shadow: 0 30px 60px var(--primary-glow);
+        }
+
+        .member-card:hover::before {
+            opacity: 1;
         }
 
         .member-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 15px;
+            gap: 16px;
+            margin-bottom: 20px;
         }
         .member-avatar {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             background: var(--primary-grad);
             color: white;
-            border-radius: 14px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 16px;
-            box-shadow: 0 0 15px var(--primary-glow);
+            box-shadow: 0 8px 20px var(--primary-glow);
             flex-shrink: 0;
         }
         .member-info h3 {
             margin: 0 0 4px 0;
             font-size: 16px;
+            font-weight: 700;
             color: var(--text-color);
         }
         .member-info p {
             margin: 0;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--primary);
             font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         .member-details {
@@ -332,18 +403,21 @@
             color: var(--text-muted);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             border-top: 1px solid var(--border-color);
-            padding-top: 14px;
+            padding-top: 16px;
         }
         .member-details div {
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
         .member-details strong {
             color: var(--text-color);
+            font-weight: 600;
         }
 
+        /* Toast Notification */
         #toastBox {
             position: fixed;
             bottom: 30px;
@@ -352,16 +426,16 @@
             border: 1px solid var(--primary);
             color: var(--text-color);
             padding: 14px 22px;
-            border-radius: 14px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(25px);
             z-index: 9999;
             display: flex;
             align-items: center;
             gap: 12px;
             transform: translateY(100px);
             opacity: 0;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         #toastBox.show {
             transform: translateY(0);
@@ -369,17 +443,19 @@
         }
         #toastBox i {
             color: var(--primary);
-            font-size: 18px;
+            font-size: 16px;
         }
 
+        /* Footer */
         footer {
-            background: #020408;
-            color: #94a3b8;
-            padding: 40px 16px 25px;
+            background: var(--nav-bg);
+            color: var(--text-muted);
+            padding: 40px 20px;
             border-top: 1px solid var(--border-color);
             text-align: center;
             font-size: 12px;
-            margin-top: 80px;
+            margin-top: 120px;
+            letter-spacing: 0.3px;
         }
     </style>
 </head>
@@ -399,14 +475,14 @@
             </a>
 
             <ul class="nav-links-right">
-                <div class="nav-desktop-links" style="display: flex; gap: 20px; align-items: center;">
+                <div class="nav-desktop-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="rules.html">Rules</a></li>
                     <li><a href="students.html" class="active">Students</a></li>
                     <li><a href="performance.html">Performance</a></li>
                 </div>
-                <li><button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme">🌓</button></li>
+                <li><button class="theme-btn" onclick="toggleTheme()" title="Toggle Theme"><i class="fas fa-adjust"></i></button></li>
             </ul>
         </div>
     </header>
@@ -415,14 +491,14 @@
         
         <div class="page-header">
             <div class="school-subname">Karotoya Collectorate Adarsha Siksha Niketan Science Club</div>
-            <h2>ক্লাব সদস্য  তালিকা (Students Directory)</h2>
+            <h2>ক্লাব সদস্য তালিকা (Students Directory)</h2>
         </div>
 
         <!-- Search Bar -->
         <div class="filter-bar">
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" class="search-input" placeholder="ক্লাব রোল, নাম, ক্লাস বা সেকশন দিয়ে খুঁজুন..." onkeyup="filterMembers()">
+                <input type="text" id="searchInput" class="search-input" placeholder="ক্লাব রোল, নাম, ক্লাস বা সেকশন দিয়ে খুঁজুন..." onkeyup="filterMembers()">
             </div>
         </div>
 
@@ -436,12 +512,6 @@
     </footer>
 
     <script>
-        /* 
-           ===================================================================
-           💡 এখানে আপনি `clubRoll: "101"` থেকে শুরু করে পর্যায়ক্রমে ২০০+ শিক্ষার্থীর 
-           ক্লাব রোল, নাম, ক্লাস, সেকশন ও ক্লাস রোল বসিয়ে নিতে পারবেন।
-           ===================================================================
-        */
         const membersList = [
             { clubRoll: "101", name: "Ridwan Prodhan", class: "Class 8", section: "Boys-2", classRoll: "01", role: "General Member" },
             { clubRoll: "102", name: "aaa", class: "Class 9", section: "Science-A", classRoll: "02", role: "General Secretary" },
@@ -538,7 +608,7 @@
             container.innerHTML = '';
 
             if (list.length === 0) {
-                container.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">কোনো শিক্ষার্থী খুঁজে পাওয়া যায়নি।</p>`;
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted); padding: 40px;">কোনো শিক্ষার্থী খুঁজে পাওয়া যায়নি।</p>`;
                 return;
             }
 
