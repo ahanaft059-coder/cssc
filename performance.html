@@ -17,30 +17,30 @@
 
     <style>
         :root {
-            --bg-color: #030712;
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #10b981;
-            --primary-glow: rgba(16, 185, 129, 0.5);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --nav-bg: rgba(3, 7, 18, 0.9);
-            --primary-grad: linear-gradient(135deg, #10b981, #06b6d4);
+            --bg-color: #040812;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --text-color: #f1f5f9;
+            --text-muted: #93c5fd;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.35);
+            --border-color: rgba(56, 189, 248, 0.18);
+            --nav-bg: rgba(30, 41, 59, 0.85);
+            --primary-grad: linear-gradient(135deg, #38bdf8, #2563eb);
             --shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
             --present: #22c55e;
             --absent: #ef4444;
         }
 
         [data-theme="light"] {
-            --bg-color: #f8fafc;
+            --bg-color: #f0f7ff;
             --card-bg: rgba(255, 255, 255, 0.85);
             --text-color: #0f172a;
-            --text-muted: #64748b;
-            --primary: #059669;
-            --primary-glow: rgba(5, 150, 105, 0.3);
-            --border-color: rgba(0, 0, 0, 0.08);
-            --nav-bg: rgba(248, 250, 252, 0.9);
-            --primary-grad: linear-gradient(135deg, #059669, #0891b2);
+            --text-muted: #475569;
+            --primary: #0284c7;
+            --primary-glow: rgba(2, 132, 199, 0.2);
+            --border-color: rgba(2, 132, 199, 0.2);
+            --nav-bg: rgba(226, 232, 240, 0.9);
+            --primary-grad: linear-gradient(135deg, #0ea5e9, #2563eb);
             --shadow: 0 10px 30px 0 rgba(15, 23, 42, 0.06);
             --present: #16a34a;
             --absent: #dc2626;
@@ -127,7 +127,7 @@
         .unique-logo {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, #10b981, #047857);
+            background: var(--primary-grad);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -136,6 +136,10 @@
             box-shadow: 0 0 15px var(--primary-glow);
             border: 1px solid rgba(255,255,255,0.25);
             flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+        .unique-logo:hover {
+            transform: rotate(15deg) scale(1.05);
         }
         .unique-logo i {
             color: #fff;
@@ -173,17 +177,46 @@
             align-items: center;
         }
 
-        .nav-links-right a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s, transform 0.2s;
+        .nav-desktop-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
         }
 
-        .nav-links-right a:hover, .nav-links-right a.active {
-            color: var(--primary);
-            transform: translateY(-2px);
+        /* Unique Hover & Active Line effect */
+        .nav-desktop-links a {
+            text-decoration: none;
+            color: #ffffff !important;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .nav-desktop-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--primary-grad);
+            box-shadow: 0 0 8px var(--primary);
+            transition: width 0.3s ease-in-out;
+            border-radius: 2px;
+        }
+
+        .nav-desktop-links a:hover::after, 
+        .nav-desktop-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-desktop-links a:hover, .nav-desktop-links a.active {
+            color: var(--primary) !important;
+            opacity: 1;
         }
 
         .theme-btn {
@@ -199,6 +232,7 @@
         .theme-btn:hover {
             border-color: var(--primary);
             box-shadow: 0 0 10px var(--primary-glow);
+            transform: scale(1.05);
         }
 
         /* Container & Page Header */
@@ -267,6 +301,12 @@
             border-radius: 10px;
             color: var(--text-color);
             font-size: 13px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
         }
         .search-box i {
             position: absolute;
@@ -322,7 +362,7 @@
         }
 
         tr:hover td {
-            background: rgba(16, 185, 129, 0.04);
+            background: rgba(56, 189, 248, 0.05);
         }
 
         .badge-role {
@@ -330,7 +370,7 @@
             border-radius: 6px;
             font-size: 11px;
             font-weight: 600;
-            background: rgba(16, 185, 129, 0.15);
+            background: rgba(56, 189, 248, 0.15);
             color: var(--primary);
         }
 
@@ -407,7 +447,7 @@
             </a>
 
             <ul class="nav-links-right">
-                <div class="nav-desktop-links" style="display: flex; gap: 20px; align-items: center;">
+                <div class="nav-desktop-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="rules.html">Rules</a></li>
@@ -468,10 +508,8 @@
     </footer>
 
     <script>
-        // SET CURRENT ACTIVE DAY: Jehetu ekhon dhoro 5ti class/din sesh hoyeche, tai 6 theke 15 porjonto "Coming" dekhabe. (Tumi nijer moto kore eta change korte parbe)
-        const currentActiveDay = 0; 
+        const currentActiveDay = 5; 
 
-        // STUDENT DATA (100+ student supportable array)
         const clubStudentsData = [
             { id: 1, name: "Tanvir Ahmed", role: "President", attendance: ["P","P","A","P","P"] },
             { id: 2, name: "Sumaiya Akter", role: "Secretary", attendance: ["P","P","P","P","A"] },
@@ -506,10 +544,8 @@
                     let cellContent = "";
                     
                     if (d > currentActiveDay) {
-                        // Future days where date/class has not arrived yet
                         cellContent = `<span class="status-coming">Coming</span>`;
                     } else {
-                        // Get attendance status for past/current days (Default to 'P' if not specified)
                         let st = (student.attendance && student.attendance[d-1]) ? student.attendance[d-1] : 'P';
                         
                         if(st === 'P') {
@@ -548,7 +584,6 @@
             showToast(`Switched to ${next} mode`);
         }
 
-        // Initial render
         renderTable();
     </script>
 </body>
