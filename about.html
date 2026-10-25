@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .bn { font-family: 'Hind Siliguri', 'Plus Jakarta Sans', system-ui, sans-serif; }
+    .page-hero h1 { font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+    .page-hero h1 small { display: block; font-size: .42em; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 8px; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .page-hero p { font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+
+    .about-wrap { max-width: 1000px; margin: 0 auto; padding-bottom: 20px; }
+    .about-grid { display: grid; gap: 22px; margin-bottom: 22px; }
+    .acard { padding: 32px; position: relative; overflow: hidden; transition: transform .4s cubic-bezier(.16, 1, .3, 1), border-color .3s, box-shadow .4s; }
+    .acard::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--grad); }
+    .acard:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 26px 50px var(--glow); }
+    .acard h3 { display: flex; align-items: center; gap: 14px; font-size: 20px; font-weight: 700; padding-bottom: 16px; margin-bottom: 18px; border-bottom: 1px solid var(--border); font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+    .ic { width: 46px; height: 46px; border-radius: 14px; background: var(--grad); color: #fff; display: grid; place-items: center; font-size: 18px; flex: none; box-shadow: 0 8px 22px var(--glow); }
+    .acard p { font-size: 16px; color: var(--muted); line-height: 1.85; margin-bottom: 14px; font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+    .acard p:last-child { margin-bottom: 0; }
+
+    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 70px; }
+    .mv { padding: 32px; transition: transform .4s cubic-bezier(.16, 1, .3, 1), border-color .3s, box-shadow .4s; }
+    .mv:hover { transform: translateY(-4px); border-color: var(--primary); box-shadow: 0 26px 50px var(--glow); }
+    .mv .ic { width: 56px; height: 56px; font-size: 22px; border-radius: 17px; margin-bottom: 20px; }
+    .mv h4 { font-size: 20px; font-weight: 700; margin-bottom: 10px; font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+    .mv p { font-size: 16px; color: var(--muted); line-height: 1.85; font-family: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif; }
+
+    @media (max-width: 768px) { .mv-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .acard, .mv { padding: 22px; } .acard h3 { font-size: 18px; } .acard p, .mv p { font-size: 15.5px; } }
+  </style>
+</head>
+<body>
+
+  <div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+  <header>
+    <div class="nav-content">
+      <a href="index.html" class="brand">
+        <div class="logo"><i class="fas fa-atom"></i></div>
+        <div class="brand-text"><b>Karotoya Collectorate</b><span>SCIENCE CLUB</span></div>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="rules.html">Rules</a></li>
+          <li><a href="students.html">Students</a></li>
+          <li><a href="performance.html">Performance</a></li>
+        </ul>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme"><i class="fas fa-circle-half-stroke"></i></button>
+        <button class="icon-btn menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="fas fa-bars" id="menuIcon"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-panel" id="mobileNavPanel">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+    <a href="about.html" onclick="toggleMobileMenu()">About Institution</a>
+    <a href="rules.html" onclick="toggleMobileMenu()">Rules &amp; Regulations</a>
+    <a href="students.html" onclick="toggleMobileMenu()">Registered Students</a>
+    <a href="performance.html" onclick="toggleMobileMenu()">Performance &amp; Awards</a>
+  </nav>
+
+  <div class="page-hero wrap">
+    <span class="eyebrow"><i class="fas fa-circle-info"></i> About Us</span>
+    <h1>আমাদের <span class="grad-text">সম্পর্কে</span><small>About Us</small></h1>
+    <p>আমাদের ইতিহাস, লক্ষ্য এবং তরুণ বিজ্ঞান মনস্কদের এগিয়ে নেওয়ার পেছনের অনুপ্রেরণা</p>
+  </div>
+
+  <main class="wrap about-wrap">
+
+    <div class="about-grid">
+      <div class="acard glass reveal">
+        <h3><span class="ic"><i class="fas fa-book-open"></i></span> আমরা কারা?</h3>
+        <p>কারতোয়া কালেক্টরেট আদর্শ শিক্ষা নিকেতন সায়েন্স ক্লাব (CSSC) হলো তরুণ বিজ্ঞান প্রতিভা, সমস্যা সমাধানকারী এবং উদীয়মান উদ্ভাবকদের লালন করার একটি গতিশীল প্ল্যাটফর্ম। আমরা এমন একটি হাতে-কলমে শেখার পরিবেশ তৈরি করি যেখানে শিক্ষার্থীরা ক্লাসরুমের গণ্ডির বাইরে পদার্থবিজ্ঞান, রসায়ন, জীববিজ্ঞান, কম্পিউটার প্রোগ্রামিং এবং রোবোটিক্স নিয়ে কাজ করার সুযোগ পায়।</p>
+        <p>বার্ষিক বিজ্ঞান মেলা, প্রতিযোগিতামূলক পরীক্ষা প্রস্তুতি এবং সহযোগিতামূলক প্রজেক্ট তৈরির মাধ্যমে আমাদের সদস্যরা সৃজনশীল প্রকৌশল ও বৈজ্ঞানিক অনুসন্ধিৎসায় নিয়মিত নিজেদের দক্ষ করে তুলছে।</p>
+      </div>
+
+      <div class="acard glass reveal">
+        <h3><span class="ic"><i class="fas fa-clock-rotate-left"></i></span> আমাদের প্রতিষ্ঠা ও যাত্রা</h3>
+        <p>শিক্ষার্থীদের মাঝে যৌক্তিক চিন্তা, কৌতূহল এবং বিজ্ঞানমনস্কতা জাগিয়ে তোলার দূরদর্শী ভাবনা থেকে ২০২৬ সালে এই ক্লাবটি প্রতিষ্ঠিত হয়। অল্প সময়ের মধ্যেই CSSC স্কুলের অন্যতম একটি প্রাণবন্ত ও সক্রিয় অ্যাকাডেমিক কমিউনিটিতে পরিণত হয়েছে।</p>
+        <p>ইন-হাউস ল্যাব সেশনের আয়োজন থেকে শুরু করে জাতীয় বিজ্ঞান অলিম্পিয়াড এবং সায়েন্স ফিয়েস্তায় অংশগ্রহণ—আমাদের এই কমিউনিটি নিষ্ঠা, দলগত কাজ এবং নতুন আবিষ্কারের ওপর ভিত্তি করে দৃঢ়ভাবে এগিয়ে চলেছে।</p>
+      </div>
+    </div>
+
+    <div class="mv-grid">
+      <div class="mv glass reveal">
+        <div class="ic"><i class="fas fa-bullseye"></i></div>
+        <h4>আমাদের লক্ষ্য (Our Mission)</h4>
+        <p>শিক্ষার্থীদের গভীর বিশ্লেষণাত্মক চিন্তাভাবনা, বাস্তবসম্মত পরীক্ষামূলক দক্ষতা এবং আধুনিক বিজ্ঞান ও প্রযুক্তি যেমন কোডিং ও রোবোটিক্সে কারিগরি পারদর্শিতা দিয়ে শক্তিশালী করা।</p>
+      </div>
+      <div class="mv glass reveal">
+        <div class="ic"><i class="fas fa-eye"></i></div>
+        <h4>আমাদের দৃষ্টিভঙ্গি (Our Vision)</h4>
+        <p>ভবিষ্যতের প্রযুক্তিগত এবং পরিবেশগত চ্যালেঞ্জগুলো মোকাবিলায় টেকসই সমাধান তৈরি করতে সক্ষম দূরদর্শী নেতা ও নির্মাতাদের একটি প্রজন্ম গড়ে তোলা।</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <h3>Karotoya Collectorate Adarsha Siksha Niketan Science Club</h3>
+        <p>Nurturing logical thinkers, innovators, and future scientists.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/groups/your-fb-group-id" target="_blank" rel="noopener" title="Facebook Group"><i class="fas fa-users"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61594144386733" target="_blank" rel="noopener" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/kcasnsc?stkn=eTc3OHA0bjl0dmVk" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="rules.html">Rules &amp; Regulations</a></li>
+          <li><a href="students.html">Registered Students</a></li>
+          <li><a href="performance.html">Performance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact &amp; Community</h3>
+        <p>Karotoya Collectorate Adarsha Siksha Niketan, Panchagarh-5000, Rangpur, Bangladesh</p>
+        <p style="color:var(--primary);font-weight:700">Email: kcasnsc@gmail.com</p>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

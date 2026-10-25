@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance & Attendance - Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root { --bad: #f87171; }
+    [data-theme="light"] { --bad: #dc2626; }
+
+    .perf-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px; margin-bottom: 22px; }
+    .perf-stats .stat { padding: 20px; }
+    .perf-stats .stat h3 { font-size: 28px; }
+
+    .tracker { padding: 24px; margin-bottom: 70px; }
+    .controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 18px; }
+    .search { position: relative; flex: 1 1 260px; max-width: 420px; }
+    .search i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .search input { width: 100%; font-family: inherit; font-size: 14px; font-weight: 600; color: var(--text); background: var(--card-solid); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px 12px 42px; outline: none; transition: border-color .2s, box-shadow .2s; }
+    .search input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--glow); }
+    .note { font-size: 12.5px; color: var(--muted); font-weight: 600; display: flex; gap: 8px; align-items: center; }
+    .note i { color: var(--primary); }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 14px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend .p { color: var(--ok); } .legend .a { color: var(--bad); }
+
+    .table-wrap { width: 100%; overflow: auto; max-height: 620px; border: 1px solid var(--border); border-radius: 16px; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; white-space: nowrap; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: center; background: var(--card-solid); }
+    th { position: sticky; top: 0; z-index: 3; color: var(--primary); font-weight: 800; font-size: 11.5px; letter-spacing: .6px; text-transform: uppercase; }
+    th:nth-child(-n+3), td:nth-child(-n+3) { text-align: left; }
+    /* keep the name visible while scrolling sideways */
+    th:nth-child(2), td:nth-child(2) { position: sticky; left: 0; z-index: 2; box-shadow: 1px 0 0 var(--border); }
+    th:nth-child(2) { z-index: 4; }
+    tbody tr:hover td { background: color-mix(in srgb, var(--primary) 8%, var(--card-solid)); }
+    tbody tr:last-child td { border-bottom: 0; }
+    td strong { font-weight: 800; }
+    .badge-role { display: inline-block; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 800; background: var(--glow); color: var(--primary); }
+    .st-p { color: var(--ok); font-weight: 800; }
+    .st-a { color: var(--bad); font-weight: 800; }
+    .st-c { color: var(--muted); font-size: 11px; font-style: italic; opacity: .8; }
+    .pct { font-weight: 800; }
+    th:last-child, td:last-child { position: sticky; right: 0; box-shadow: -1px 0 0 var(--border); z-index: 2; }
+    th:last-child { z-index: 4; }
+    .empty-row td { text-align: center !important; color: var(--muted); padding: 34px; position: static !important; }
+
+    @media (max-width: 600px) {
+      .tracker { padding: 14px; }
+      th, td { padding: 10px 10px; }
+      .search { max-width: none; }
+      th:last-child, td:last-child { position: static; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+  <header>
+    <div class="nav-content">
+      <a href="index.html" class="brand">
+        <div class="logo"><i class="fas fa-atom"></i></div>
+        <div class="brand-text"><b>Karotoya Collectorate</b><span>SCIENCE CLUB</span></div>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="rules.html">Rules</a></li>
+          <li><a href="students.html">Students</a></li>
+          <li><a href="performance.html">Performance</a></li>
+        </ul>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme"><i class="fas fa-circle-half-stroke"></i></button>
+        <button class="icon-btn menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="fas fa-bars" id="menuIcon"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-panel" id="mobileNavPanel">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+    <a href="about.html" onclick="toggleMobileMenu()">About Institution</a>
+    <a href="rules.html" onclick="toggleMobileMenu()">Rules &amp; Regulations</a>
+    <a href="students.html" onclick="toggleMobileMenu()">Registered Students</a>
+    <a href="performance.html" onclick="toggleMobileMenu()">Performance &amp; Awards</a>
+  </nav>
+
+  <div class="page-hero wrap">
+    <span class="eyebrow"><i class="fas fa-chart-line"></i> Performance</span>
+    <h1>Member <span class="grad-text">Attendance</span> Tracker</h1>
+    <p>View-only 15-day attendance sheet. Present (P), Absent (A) and upcoming days.</p>
+  </div>
+
+  <main class="wrap">
+
+    <div class="perf-stats">
+      <div class="stat glass reveal"><div class="stat-ic"><i class="fas fa-users"></i></div><div><h3 id="sMembers">0</h3><p>Members</p></div></div>
+      <div class="stat glass reveal"><div class="stat-ic"><i class="fas fa-user-check"></i></div><div><h3 id="sToday">0</h3><p id="sTodayLbl">Present today</p></div></div>
+      <div class="stat glass reveal"><div class="stat-ic"><i class="fas fa-percent"></i></div><div><h3 id="sAvg">0%</h3><p>Avg. attendance</p></div></div>
+    </div>
+
+    <div class="tracker glass reveal">
+      <div class="controls">
+        <div class="search">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search student by name..." aria-label="Search student by name">
+        </div>
+        <div class="note"><i class="fas fa-circle-info"></i> Current active day is updated automatically.</div>
+      </div>
+      <div class="legend">
+        <span class="p"><i class="fas fa-check"></i> Present</span>
+        <span class="a"><i class="fas fa-xmark"></i> Absent</span>
+        <span><i class="far fa-clock"></i> Coming</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead id="tHead"></thead>
+          <tbody id="attendanceTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="foot-bottom" style="border-top:0;padding-top:0">&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    /* ===== EDIT HERE ===== */
+    var TOTAL_DAYS = 15;
+    var currentActiveDay = 5;   // days up to this number are shown as P / A, the rest as "Coming"
+
+    var clubStudentsData = [
+      /* Committee: P = present, A = absent (edit the 5 marks per person) */
+      { id: 1,  name: "Abdullah Al Saud",      role: "President",           attendance: ["P","P","P","P","P"] },
+      { id: 2,  name: "Ahanaf Abid Omlan",     role: "Vice President",      attendance: ["P","P","P","P","P"] },
+      { id: 3,  name: "Anika Tasnim Oishi",    role: "Secretary",           attendance: ["P","P","P","P","P"] },
+      { id: 4,  name: "Rafiul Islam",          role: "Assistant Secretary", attendance: ["P","P","P","P","P"] },
+      { id: 5,  name: "Raisa",                 role: "Joint Secretary",     attendance: ["P","P","P","P","P"] },
+      { id: 6,  name: "Efty",                  role: "Communication Head",  attendance: ["P","P","P","P","P"] },
+      { id: 7,  name: "Jannatul Tajri Maliha", role: "Coordinator",         attendance: ["P","P","P","P","P"] },
+      { id: 8,  name: "Ratul Islam (Lam)",     role: "Treasurer",           attendance: ["P","P","P","P","P"] },
+      { id: 9,  name: "Hridhi",                role: "Science Secretary",   attendance: ["P","P","P","P","P"] },
+
+      /* General members */
+      { id: 10, name: "Ridwan Prodhan",             role: "General Member", attendance: ["P","P","A","P","P"] },
+      { id: 11, name: "Tasfia Jahan Nishi",         role: "General Member", attendance: ["P","P","P","P","A"] },
+      { id: 12, name: "Abid Hasan",                 role: "General Member", attendance: ["A","P","P","P","P"] },
+      { id: 13, name: "Mahady Alam Babu",           role: "General Member", attendance: ["P","A","P","P","P"] },
+      { id: 14, name: "Abu Sayed Adil",             role: "General Member", attendance: ["P","P","P","A","P"] },
+      { id: 15, name: "Tomalika Roy",               role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 16, name: "Mustabshirah Ebtihaj Orni",  role: "General Member", attendance: ["P","A","P","P","P"] },
+      { id: 17, name: "Ahanaf Hasan Riyan",         role: "General Member", attendance: ["P","P","A","P","P"] },
+      { id: 18, name: "Nadia Mahjabin Bushra",      role: "General Member", attendance: ["A","P","P","P","A"] },
+      { id: 19, name: "Al Monin",                   role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 20, name: "Rita Moni",                  role: "General Member", attendance: ["P","P","P","P","P"] },
+      /* Sample names (placeholders) - replace with real members */
+      { id: 21, name: "Sabbir Hossain", role: "General Member", attendance: ["P","P","P","A","P"] },
+      { id: 22, name: "Maliha Rahman", role: "General Member", attendance: ["P","P","A","P","P"] },
+      { id: 23, name: "Imran Khan", role: "General Member", attendance: ["A","P","P","P","P"] },
+      { id: 24, name: "Farzana Yasmin", role: "General Member", attendance: ["P","P","P","P","A"] },
+      { id: 25, name: "Tahsin Ahmed", role: "General Member", attendance: ["P","A","P","P","P"] },
+      { id: 26, name: "Sharmin Sultana", role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 27, name: "Nayeem Uddin", role: "General Member", attendance: ["P","P","A","A","P"] },
+      { id: 28, name: "Jarin Tasnim", role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 29, name: "Rafi Chowdhury", role: "General Member", attendance: ["A","P","P","P","P"] },
+      { id: 30, name: "Mim Akter", role: "General Member", attendance: ["P","P","P","A","P"] },
+      { id: 31, name: "Shakib Al Hasan", role: "General Member", attendance: ["P","P","P","P","A"] },
+      { id: 32, name: "Lamia Islam", role: "General Member", attendance: ["P","A","P","P","P"] },
+      { id: 33, name: "Zubayer Ahmed", role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 34, name: "Anika Rahman", role: "General Member", attendance: ["P","P","A","P","P"] },
+      { id: 35, name: "Tamim Iqbal", role: "General Member", attendance: ["A","A","P","P","P"] },
+      { id: 36, name: "Sadiya Noor", role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 37, name: "Fahad Hossain", role: "General Member", attendance: ["P","P","P","A","P"] },
+      { id: 38, name: "Nafisa Karim", role: "General Member", attendance: ["P","P","P","P","A"] },
+      { id: 39, name: "Arif Mahmud", role: "General Member", attendance: ["P","A","P","P","P"] },
+      { id: 40, name: "Humayra Khanam", role: "General Member", attendance: ["P","P","P","P","P"] }
+    ];
+    /* ===================== */
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    function mark(s, d) {
+      var v = s.attendance && s.attendance[d - 1];
+      return v === 'P' ? 'P' : v === 'A' ? 'A' : '-';
+    }
+    function percent(s) {            // null when nothing recorded yet
+      var p = 0, rec = 0;
+      for (var d = 1; d <= currentActiveDay; d++) {
+        var m = mark(s, d);
+        if (m !== '-') rec++;
+        if (m === 'P') p++;
+      }
+      return rec ? Math.round(p / rec * 100) : null;
+    }
+
+    function renderHead() {
+      var h = '<tr><th>#</th><th>Student Name</th><th>Role / Class</th>';
+      for (var d = 1; d <= TOTAL_DAYS; d++) h += '<th>Day ' + d + '</th>';
+      document.getElementById('tHead').innerHTML = h + '<th>Total</th></tr>';
+    }
+
+    function renderTable(q) {
+      q = (q || '').toLowerCase();
+      var tbody = document.getElementById('attendanceTableBody');
+      var list = clubStudentsData.filter(function (s) { return s.name.toLowerCase().indexOf(q) !== -1; });
+
+      if (!list.length) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="' + (TOTAL_DAYS + 4) + '">No students found matching your search.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = list.map(function (s, i) {
+        var row = '<tr><td>' + (s.id || i + 1) + '</td><td><strong>' + esc(s.name) + '</strong></td><td><span class="badge-role">' + esc(s.role) + '</span></td>';
+        for (var d = 1; d <= TOTAL_DAYS; d++) {
+          if (d > currentActiveDay) row += '<td><span class="st-c">Coming</span></td>';
+          else {
+            var m = mark(s, d);
+            row += '<td>' + (m === 'P' ? '<span class="st-p"><i class="fas fa-check"></i> P</span>'
+                          : m === 'A' ? '<span class="st-a"><i class="fas fa-xmark"></i> A</span>' : '-') + '</td>';
+          }
+        }
+        var pc = percent(s);
+        if (pc === null) return row + '<td class="pct" style="color:var(--muted)">–</td></tr>';
+        return row + '<td class="pct" style="color:' + (pc >= 75 ? 'var(--ok)' : pc >= 50 ? 'var(--warn)' : 'var(--bad)') + '">' + pc + '%</td></tr>';
+      }).join('');
+    }
+
+    function renderSummary() {
+      var n = clubStudentsData.length;
+      var presentToday = clubStudentsData.filter(function (s) { return currentActiveDay && mark(s, currentActiveDay) === 'P'; }).length;
+      var pcs = clubStudentsData.map(percent).filter(function (x) { return x !== null; });
+      var avg = pcs.length ? Math.round(pcs.reduce(function (a, b) { return a + b; }, 0) / pcs.length) : 0;
+      document.getElementById('sMembers').textContent = n;
+      document.getElementById('sToday').textContent = presentToday + '/' + n;
+      document.getElementById('sTodayLbl').textContent = 'Present on Day ' + currentActiveDay;
+      document.getElementById('sAvg').textContent = pcs.length ? avg + '%' : '–';
+    }
+
+    document.getElementById('searchInput').addEventListener('input', function () { renderTable(this.value); });
+    renderHead(); renderTable(); renderSummary();
+  </script>
+</body>
+</html>
