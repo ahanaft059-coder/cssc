@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Zone — KCASN Science Club</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+  <header>
+    <div class="nav-content">
+      <a href="index.html" class="brand">
+        <div class="logo"><i class="fas fa-atom"></i></div>
+        <div class="brand-text"><b>Karotoya Collectorate</b><span>SCIENCE CLUB</span></div>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="rules.html">Rules</a></li>
+          <li><a href="students.html">Students</a></li>
+          <li><a href="performance.html">Performance</a></li>
+        </ul>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme"><i class="fas fa-circle-half-stroke"></i></button>
+        <button class="icon-btn menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="fas fa-bars" id="menuIcon"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-panel" id="mobileNavPanel">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+    <a href="about.html" onclick="toggleMobileMenu()">About Institution</a>
+    <a href="rules.html" onclick="toggleMobileMenu()">Rules &amp; Regulations</a>
+    <a href="students.html" onclick="toggleMobileMenu()">Registered Students</a>
+    <a href="performance.html" onclick="toggleMobileMenu()">Performance &amp; Awards</a>
+  </nav>
+
+  <div class="page-hero wrap">
+    <span class="eyebrow"><i class="fas fa-book-open-reader"></i> Personal Study Zone</span>
+    <h1>Study <span class="grad-text">smarter</span>, one subject at a time.</h1>
+    <p>Choose your class, get a suggested plan, then time each subject on its own. Everything is saved on this device.</p>
+  </div>
+
+  <main class="wrap" style="padding-bottom:90px">
+
+    <!-- SETUP -->
+    <div class="panel glass reveal" id="setupPanel">
+      <h3><i class="fas fa-sliders"></i> Your setup</h3>
+      <div class="setup-grid">
+        <div class="field">
+          <label for="classSel">Class</label>
+          <select id="classSel">
+            <option value="3">Class 3</option><option value="4">Class 4</option><option value="5">Class 5</option>
+            <option value="6">Class 6</option><option value="7">Class 7</option><option value="8">Class 8</option>
+            <option value="9">Class 9</option><option value="10">Class 10</option>
+          </select>
+        </div>
+        <div class="field" id="groupField" style="display:none">
+          <label for="groupSel">Group</label>
+          <select id="groupSel">
+            <option value="science">Science</option>
+            <option value="humanities">Humanities</option>
+            <option value="business">Business Studies</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="hoursRange">Daily study time: <span class="range-val" id="hoursVal">3h</span></label>
+          <input type="range" id="hoursRange" min="0.5" max="8" step="0.5" value="3">
+        </div>
+        <div class="field">
+          <label for="focusSel">Break reminder</label>
+          <select id="focusSel">
+            <option value="0">Off</option><option value="20">Every 20 min</option><option value="25">Every 25 min</option>
+            <option value="30">Every 30 min</option><option value="40">Every 40 min</option><option value="50">Every 50 min</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="buildBtn"><i class="fas fa-wand-magic-sparkles"></i> Build my plan</button>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="overview">
+      <div class="big-ring-card glass reveal">
+        <div class="big-ring" id="bigRing"><div><b id="ringTime">0m</b><small id="ringSub">of 3h goal</small></div></div>
+        <div class="mini-stats">
+          <div><b id="statStreak">0</b><small>Day streak</small></div>
+          <div><b id="statDone">0/0</b><small>Subjects done</small></div>
+          <div><b id="statWeek">0h</b><small>This week</small></div>
+        </div>
+      </div>
+
+      <div class="suggest-card glass reveal">
+        <div class="next-up" id="nextUp"></div>
+        <div>
+          <h3 style="font-size:15px;font-weight:800;margin-bottom:12px;display:flex;gap:9px;align-items:center"><i class="fas fa-lightbulb" style="color:var(--warn)"></i> Tips for <span id="tipsFor">your class</span></h3>
+          <ul class="tips" id="tipsList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBJECTS -->
+    <div class="subj-head">
+      <h3><i class="fas fa-stopwatch"></i> Subject timers</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" id="applySugBtn"><i class="fas fa-rotate"></i> Apply suggested targets</button>
+        <button class="btn btn-ghost btn-sm" id="resetDayBtn"><i class="fas fa-eraser"></i> Reset today</button>
+      </div>
+    </div>
+    <div class="subjects" id="subjects"></div>
+
+    <!-- ADD SUBJECT -->
+    <div class="panel glass reveal" style="margin-top:22px">
+      <h3><i class="fas fa-plus"></i> Add your own subject</h3>
+      <form class="add-form" id="addForm">
+        <div class="field"><label for="newName">Subject name</label><input type="text" id="newName" maxlength="28" placeholder="e.g. Arabic, Drawing, Coding" required></div>
+        <div class="field" style="max-width:160px"><label for="newMin">Daily target (min)</label><input type="number" id="newMin" min="5" max="480" step="5" value="30"></div>
+        <button class="btn btn-primary" type="submit"><i class="fas fa-plus"></i> Add</button>
+      </form>
+    </div>
+
+    <!-- WEEKLY -->
+    <div class="panel glass reveal">
+      <h3><i class="fas fa-chart-column"></i> Last 7 days</h3>
+      <div class="chart" id="chart"></div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ---------- Subject catalog (weight = how much of your daily time it should get) ---------- */
+    var C = {
+      bangla:   { name: 'Bangla', icon: 'book', w: 1.0 },
+      english:  { name: 'English', icon: 'language', w: 1.1 },
+      math:     { name: 'Mathematics', icon: 'square-root-variable', w: 1.3 },
+      science:  { name: 'Science', icon: 'flask', w: 1.2 },
+      bgs:      { name: 'Bangladesh & Global Studies', icon: 'earth-asia', w: 0.9 },
+      religion: { name: 'Religion', icon: 'moon', w: 0.6 },
+      ict:      { name: 'ICT', icon: 'laptop-code', w: 0.6 },
+      physics:  { name: 'Physics', icon: 'atom', w: 1.2 },
+      chem:     { name: 'Chemistry', icon: 'vial', w: 1.2 },
+      bio:      { name: 'Biology', icon: 'dna', w: 1.1 },
+      hmath:    { name: 'Higher Mathematics', icon: 'infinity', w: 1.0 },
+      history:  { name: 'History & Civilization', icon: 'landmark', w: 1.0 },
+      geo:      { name: 'Geography & Environment', icon: 'globe', w: 0.9 },
+      civics:   { name: 'Civics & Citizenship', icon: 'scale-balanced', w: 0.9 },
+      econ:     { name: 'Economics', icon: 'chart-line', w: 1.0 },
+      account:  { name: 'Accounting', icon: 'calculator', w: 1.2 },
+      finance:  { name: 'Finance & Banking', icon: 'building-columns', w: 1.0 },
+      biz:      { name: 'Business Entrepreneurship', icon: 'briefcase', w: 1.0 }
+    };
+
+    function bandOf(cls) { return cls <= 5 ? 'primary' : cls <= 8 ? 'middle' : 'secondary'; }
+
+    function keysFor(cls, group) {
+      var b = bandOf(cls);
+      if (b === 'primary') return ['bangla', 'english', 'math', 'science', 'bgs', 'religion'];
+      if (b === 'middle') return ['bangla', 'english', 'math', 'science', 'bgs', 'ict', 'religion'];
+      if (group === 'humanities') return ['bangla', 'english', 'math', 'history', 'geo', 'civics', 'econ', 'ict', 'religion'];
+      if (group === 'business') return ['bangla', 'english', 'math', 'account', 'finance', 'biz', 'ict', 'religion'];
+      return ['bangla', 'english', 'math', 'physics', 'chem', 'bio', 'hmath', 'ict', 'bgs', 'religion'];
+    }
+
+    var DEFAULT_HOURS = { primary: 1.5, middle: 2.5, secondary: 4 };
+    var DEFAULT_FOCUS = { primary: 20, middle: 25, secondary: 40 };
+
+    var TIPS = {
+      primary: [
+        'Short sessions work best: 20 minutes of study, then a 5-minute stretch.',
+        'Read aloud and practise handwriting daily — Bangla and English both improve fast.',
+        'Do 5–10 maths sums every day instead of a big batch before exams.',
+        'Sleep early; a rested brain remembers far more.'
+      ],
+      middle: [
+        'Do the hardest subject first while your mind is fresh — usually Maths or Science.',
+        'After each class, write 3 key points from memory. This beats re-reading.',
+        'Use 25 minutes focus + 5 minutes break, and a longer break after every 4 rounds.',
+        'Keep one weekly slot for revision of everything done in the week.'
+      ],
+      secondary: [
+        'Start with your weakest subject for 30–40 minutes while you are fresh.',
+        'Practise past questions and model tests — active recall beats passive reading.',
+        'Make formula and definition sheets for Physics, Chemistry and Maths; revise them daily.',
+        'Plan 1 full revision day each week and track mistakes in a notebook.'
+      ]
+    };
+
+    /* ---------- State ---------- */
+    var KEY = 'kcasn_study_v1';
+    var S = load();
+
+    function todayKey() {
+      var d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function load() {
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (raw) { var o = JSON.parse(raw); if (o && o.subjects) return o; }
+      } catch (e) {}
+      return null;
+    }
+    function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+    function uid() { return 's' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+    /* Build suggestion: minutes per subject from weights, adjusted by confidence (1 = weak → more time) */
+    function suggestMinutes(subjects, totalMin) {
+      var ws = subjects.map(function (s) { return (s.w || 1) * (1 + (3 - (s.conf || 2)) * 0.35); });
+      var sum = ws.reduce(function (a, b) { return a + b; }, 0) || 1;
+      return ws.map(function (w) { return Math.max(5, Math.round((totalMin * w / sum) / 5) * 5); });
+    }
+
+    function buildPlan(cls, group, hours, focus) {
+      var keys = keysFor(cls, group);
+      var subs = keys.map(function (k) { return { id: uid(), key: k, name: C[k].name, icon: C[k].icon, w: C[k].w, conf: 2, target: 30 }; });
+      var mins = suggestMinutes(subs, hours * 60);
+      subs.forEach(function (s, i) { s.target = mins[i]; });
+      return { cls: cls, group: group, hours: hours, focus: focus, subjects: subs, logs: {}, running: null };
+    }
+
+    if (!S) {
+      S = buildPlan(8, 'science', DEFAULT_HOURS.middle, DEFAULT_FOCUS.middle);
+      save();
+    }
+
+    /* ---------- Time helpers ---------- */
+    function nowSec() { return Date.now() / 1000; }
+    function logFor(day) { if (!S.logs[day]) S.logs[day] = {}; return S.logs[day]; }
+
+    function studiedToday(id) {
+      var base = (S.logs[todayKey()] && S.logs[todayKey()][id]) || 0;
+      if (S.running && S.running.id === id) base += Math.max(0, nowSec() - S.running.start);
+      return base;
+    }
+    function totalOn(day) {
+      var l = S.logs[day] || {}, t = 0;
+      Object.keys(l).forEach(function (k) { t += l[k]; });
+      return t;
+    }
+    function totalToday() {
+      var t = totalOn(todayKey());
+      if (S.running) t += Math.max(0, nowSec() - S.running.start);
+      return t;
+    }
+    function fmtClock(sec) {
+      sec = Math.floor(sec);
+      var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+      var mm = String(m).padStart(2, '0'), ss = String(s).padStart(2, '0');
+      return h > 0 ? h + ':' + mm + ':' + ss : mm + ':' + ss;
+    }
+    function fmtShort(sec) {
+      var m = Math.round(sec / 60);
+      if (m < 60) return m + 'm';
+      var h = Math.floor(m / 60), r = m % 60;
+      return h + 'h' + (r ? ' ' + r + 'm' : '');
+    }
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    /* Commit running time to the log (when pausing / switching) */
+    function commitRunning() {
+      if (!S.running) return;
+      var el = Math.max(0, nowSec() - S.running.start);
+      var l = logFor(todayKey());
+      l[S.running.id] = (l[S.running.id] || 0) + el;
+      S.running = null;
+    }
+
+    function startSubject(id) {
+      if (S.running && S.running.id === id) return;
+      commitRunning();
+      S.running = { id: id, start: nowSec(), lastBreak: 0 };
+      save(); renderSubjects(); updateLive();
+      var s = findSub(id);
+      showToast('Timer started: ' + (s ? s.name : ''));
+    }
+    function pauseSubject() {
+      if (!S.running) return;
+      var id = S.running.id;
+      commitRunning(); save(); renderSubjects(); updateLive();
+      var s = findSub(id);
+      showToast('Paused ' + (s ? s.name : '') + ' — nice work!');
+    }
+    function findSub(id) { return S.subjects.filter(function (s) { return s.id === id; })[0]; }
+
+    /* ---------- Streak / week ---------- */
+    function dayKeyOffset(off) {
+      var d = new Date(); d.setDate(d.getDate() - off);
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+    function streak() {
+      var n = 0, off = 0;
+      var t = totalToday();
+      if (t < 60) off = 1; // today not started yet shouldn't break streak
+      for (; off < 400; off++) {
+        if (totalOn(dayKeyOffset(off)) + (off === 0 && S.running ? Math.max(0, nowSec() - S.running.start) : 0) >= 60) n++;
+        else break;
+      }
+      return n;
+    }
+    function weekSec(id) {
+      var t = 0;
+      for (var i = 0; i < 7; i++) {
+        var l = S.logs[dayKeyOffset(i)];
+        if (l) { if (id) t += l[id] || 0; else Object.keys(l).forEach(function (k) { t += l[k]; }); }
+      }
+      if (S.running && (!id || id === S.running.id)) t += Math.max(0, nowSec() - S.running.start);
+      return t;
+    }
+
+    /* ---------- Smart suggestion for "next up" ---------- */
+    function pickNext() {
+      var best = null, bestScore = -1;
+      S.subjects.forEach(function (s) {
+        var remaining = Math.max(0, s.target * 60 - studiedToday(s.id));
+        if (remaining <= 0) return;
+        var weekRatio = weekSec(s.id) / Math.max(1, s.target * 60 * 7); // how much of the weekly goal is done
+        var score = remaining / (s.target * 60) * 1.0 + (1 - Math.min(1, weekRatio)) * 0.8 + (3 - (s.conf || 2)) * 0.25;
+        if (score > bestScore) { bestScore = score; best = { s: s, remaining: remaining, weekRatio: weekRatio }; }
+      });
+      return best;
+    }
+
+    /* ---------- Rendering ---------- */
+    var el = {
+      classSel: document.getElementById('classSel'),
+      groupSel: document.getElementById('groupSel'),
+      groupField: document.getElementById('groupField'),
+      hoursRange: document.getElementById('hoursRange'),
+      hoursVal: document.getElementById('hoursVal'),
+      focusSel: document.getElementById('focusSel'),
+      subjects: document.getElementById('subjects'),
+      bigRing: document.getElementById('bigRing')
+    };
+
+    function fmtHours(h) { return (h % 1 === 0 ? h : h.toFixed(1)) + 'h'; }
+
+    function syncSetup() {
+      el.classSel.value = String(S.cls);
+      el.groupSel.value = S.group || 'science';
+      el.groupField.style.display = S.cls >= 9 ? '' : 'none';
+      el.hoursRange.value = S.hours;
+      el.hoursVal.textContent = fmtHours(+S.hours);
+      el.focusSel.value = String(S.focus || 0);
+    }
+
+    function renderTips() {
+      var b = bandOf(S.cls);
+      document.getElementById('tipsFor').textContent = 'Class ' + S.cls;
+      document.getElementById('tipsList').innerHTML = TIPS[b].map(function (t) { return '<li><i class="fas fa-circle-check"></i><span>' + esc(t) + '</span></li>'; }).join('');
+    }
+
+    function starsHtml(s) {
+      var labels = ['', 'Needs work', 'Okay', 'Strong'];
+      var out = '<div class="stars" title="How confident are you? Weaker subjects get more suggested time">';
+      for (var i = 1; i <= 3; i++) out += '<button data-act="conf" data-id="' + s.id + '" data-v="' + i + '" class="' + ((s.conf || 2) >= i ? 'on' : '') + '" aria-label="Confidence ' + i + '"><i class="fas fa-star"></i></button>';
+      return out + '<span class="stars-label">' + labels[s.conf || 2] + '</span></div>';
+    }
+
+    function renderSubjects() {
+      if (!S.subjects.length) {
+        el.subjects.innerHTML = '<div class="empty-state glass" style="grid-column:1/-1"><i class="fas fa-book-open"></i>No subjects yet. Build a plan above or add your own subject.</div>';
+        return;
+      }
+      var sug = suggestMinutes(S.subjects, S.hours * 60);
+      el.subjects.innerHTML = S.subjects.map(function (s, i) {
+        var running = S.running && S.running.id === s.id;
+        return '<div class="subj glass' + (running ? ' running' : '') + '" data-id="' + s.id + '">' +
+          '<div class="subj-top"><div class="subj-ic"><i class="fas fa-' + esc(s.icon || 'book') + '"></i></div>' +
+          '<div><h4>' + esc(s.name) + '</h4>' + starsHtml(s) + '</div></div>' +
+          '<div class="clock" data-clock="' + s.id + '">00:00</div>' +
+          '<div class="clock-sub" data-sub="' + s.id + '"></div>' +
+          '<div class="bar"><i data-bar="' + s.id + '"></i></div>' +
+          '<div class="subj-actions">' +
+            (running
+              ? '<button class="btn btn-ghost" data-act="pause"><i class="fas fa-pause"></i> Pause</button>'
+              : '<button class="btn btn-primary" data-act="start" data-id="' + s.id + '"><i class="fas fa-play"></i> Start</button>') +
+            '<button class="icon-btn" data-act="add5" data-id="' + s.id + '" title="Add 5 minutes manually">+5</button>' +
+            '<button class="icon-btn" data-act="clear" data-id="' + s.id + '" title="Reset today for this subject"><i class="fas fa-rotate-left"></i></button>' +
+            '<button class="icon-btn" data-act="remove" data-id="' + s.id + '" title="Remove subject"><i class="fas fa-trash"></i></button>' +
+          '</div>' +
+          '<div class="target-row"><span>Daily target</span><div class="stepper">' +
+            '<button data-act="tminus" data-id="' + s.id + '" aria-label="Less">−</button><span>' + s.target + ' min</span>' +
+            '<button data-act="tplus" data-id="' + s.id + '" aria-label="More">+</button></div></div>' +
+          '<div style="margin-top:12px"><button class="sug-chip" data-act="usesug" data-id="' + s.id + '" data-v="' + sug[i] + '"><i class="fas fa-wand-magic-sparkles"></i> Suggested: ' + sug[i] + ' min</button></div>' +
+        '</div>';
+      }).join('');
+      updateLive();
+    }
+
+    function updateLive() {
+      var goalSec = S.hours * 3600;
+      var tot = totalToday();
+      var pct = Math.min(100, goalSec ? tot / goalSec * 100 : 0);
+      el.bigRing.style.setProperty('--p', pct.toFixed(1));
+      el.bigRing.classList.toggle('complete', pct >= 100);
+      document.getElementById('ringTime').textContent = fmtShort(tot);
+      document.getElementById('ringSub').textContent = pct >= 100 ? 'goal reached 🎉' : 'of ' + fmtHours(+S.hours) + ' goal';
+
+      var done = 0;
+      S.subjects.forEach(function (s) {
+        var sec = studiedToday(s.id), tsec = s.target * 60;
+        var card = el.subjects.querySelector('.subj[data-id="' + s.id + '"]');
+        var isDone = sec >= tsec;
+        if (isDone) done++;
+        if (!card) return;
+        card.classList.toggle('done', isDone);
+        card.querySelector('[data-clock]').textContent = fmtClock(sec);
+        var rem = Math.max(0, tsec - sec);
+        card.querySelector('[data-sub]').textContent = isDone ? 'Target complete — great job!' : fmtShort(rem) + ' left of ' + s.target + ' min target';
+        card.querySelector('[data-bar]').style.width = Math.min(100, tsec ? sec / tsec * 100 : 0) + '%';
+      });
+
+      document.getElementById('statDone').textContent = done + '/' + S.subjects.length;
+      document.getElementById('statStreak').textContent = streak();
+      document.getElementById('statWeek').textContent = fmtShort(weekSec());
+
+      renderNext();
+      document.title = S.running ? '⏱ ' + fmtClock(studiedToday(S.running.id)) + ' · ' + (findSub(S.running.id) || {}).name : 'Study Zone — KCASN Science Club';
+    }
+
+    var lastNextHtml = '';
+    function renderNext() {
+      var box = document.getElementById('nextUp');
+      var html;
+      if (S.running) {
+        var rs = findSub(S.running.id);
+        html = '<div class="ic"><i class="fas fa-' + esc(rs.icon) + '"></i></div><div><small>Focusing now</small><h4>' + esc(rs.name) + '</h4><p>Stay with it — you are doing great.</p></div>' +
+               '<button class="btn" data-act="pause"><i class="fas fa-pause"></i> Pause</button>';
+      } else {
+        var n = pickNext();
+        if (!n) {
+          html = S.subjects.length
+            ? '<div class="ic"><i class="fas fa-trophy"></i></div><div><small>All done</small><h4>Every target completed!</h4><p>Take a well-earned rest, or revise your weakest subject.</p></div>'
+            : '<div class="ic"><i class="fas fa-plus"></i></div><div><small>Get started</small><h4>Add a subject</h4><p>Build a plan from the setup above.</p></div>';
+        } else {
+          var why = (n.s.conf || 2) === 1 ? 'you marked it as needing work'
+                  : n.weekRatio < 0.35 ? 'it is behind this week'
+                  : 'it still has the most time left today';
+          html = '<div class="ic"><i class="fas fa-' + esc(n.s.icon) + '"></i></div><div><small>Suggested next</small><h4>' + esc(n.s.name) + '</h4><p>' + fmtShort(n.remaining) + ' to go — ' + why + '.</p></div>' +
+                 '<button class="btn" data-act="start" data-id="' + n.s.id + '"><i class="fas fa-play"></i> Start</button>';
+        }
+      }
+      if (html !== lastNextHtml) { box.innerHTML = html; lastNextHtml = html; }
+    }
+
+    function renderChart() {
+      var days = [], max = 1;
+      var names = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      for (var i = 6; i >= 0; i--) {
+        var k = dayKeyOffset(i);
+        var d = new Date(); d.setDate(d.getDate() - i);
+        var sec = totalOn(k) + (i === 0 && S.running ? Math.max(0, nowSec() - S.running.start) : 0);
+        days.push({ lbl: i === 0 ? 'Today' : names[d.getDay()], sec: sec, today: i === 0 });
+        if (sec > max) max = sec;
+      }
+      document.getElementById('chart').innerHTML = days.map(function (d) {
+        var h = Math.max(3, Math.round(d.sec / max * 130));
+        return '<div class="col' + (d.today ? ' today' : '') + '"><span class="val">' + (d.sec ? fmtShort(d.sec) : '–') + '</span><div class="barv" style="height:' + h + 'px"></div><span class="lbl">' + d.lbl + '</span></div>';
+      }).join('');
+    }
+
+    /* ---------- Events ---------- */
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-act]');
+      if (!b) return;
+      var act = b.getAttribute('data-act'), id = b.getAttribute('data-id'), s = id ? findSub(id) : null;
+
+      if (act === 'start') return startSubject(id);
+      if (act === 'pause') return pauseSubject();
+
+      if (act === 'conf' && s) { s.conf = +b.getAttribute('data-v'); save(); renderSubjects(); return; }
+      if (act === 'tplus' && s) { s.target = Math.min(480, s.target + 5); save(); renderSubjects(); return; }
+      if (act === 'tminus' && s) { s.target = Math.max(5, s.target - 5); save(); renderSubjects(); return; }
+      if (act === 'usesug' && s) { s.target = +b.getAttribute('data-v'); save(); renderSubjects(); showToast(s.name + ' target set to ' + s.target + ' min'); return; }
+
+      if (act === 'add5' && s) {
+        var l = logFor(todayKey()); l[s.id] = (l[s.id] || 0) + 300;
+        save(); updateLive(); renderChart(); showToast('Added 5 minutes to ' + s.name); return;
+      }
+      if (act === 'clear' && s) {
+        if (S.running && S.running.id === s.id) S.running = null;
+        var l2 = logFor(todayKey()); delete l2[s.id];
+        save(); renderSubjects(); renderChart(); showToast(s.name + ' reset for today'); return;
+      }
+      if (act === 'remove' && s) {
+        if (!confirm('Remove "' + s.name + '" from your list?')) return;
+        if (S.running && S.running.id === s.id) S.running = null;
+        S.subjects = S.subjects.filter(function (x) { return x.id !== s.id; });
+        save(); renderSubjects(); renderChart(); showToast(s.name + ' removed'); return;
+      }
+    });
+
+    document.getElementById('buildBtn').addEventListener('click', function () {
+      if (S.running && !confirm('A timer is running. Building a new plan will stop it. Continue?')) return;
+      var keepLogs = S.logs;
+      commitRunning();
+      var cls = +el.classSel.value;
+      var plan = buildPlan(cls, el.groupSel.value, +el.hoursRange.value, +el.focusSel.value);
+      plan.logs = {}; // old logs keyed by old subject ids; keep only totals via history
+      // keep history totals so streak/weekly chart survive a rebuild
+      Object.keys(keepLogs).forEach(function (day) {
+        var t = 0; Object.keys(keepLogs[day]).forEach(function (k) { t += keepLogs[day][k]; });
+        if (day !== todayKey()) plan.logs[day] = { _history: t };
+      });
+      S = plan; save(); syncSetup(); renderTips(); renderSubjects(); renderChart();
+      showToast('Plan ready for Class ' + cls + ' — ' + plan.subjects.length + ' subjects');
+    });
+
+    el.classSel.addEventListener('change', function () {
+      var cls = +el.classSel.value, b = bandOf(cls);
+      el.groupField.style.display = cls >= 9 ? '' : 'none';
+      el.hoursRange.value = DEFAULT_HOURS[b]; el.hoursVal.textContent = fmtHours(DEFAULT_HOURS[b]);
+      el.focusSel.value = String(DEFAULT_FOCUS[b]);
+    });
+    el.hoursRange.addEventListener('input', function () { el.hoursVal.textContent = fmtHours(+el.hoursRange.value); });
+
+    // quick changes that don't rebuild the plan
+    el.hoursRange.addEventListener('change', function () { S.hours = +el.hoursRange.value; save(); renderSubjects(); });
+    el.focusSel.addEventListener('change', function () { S.focus = +el.focusSel.value; save(); });
+
+    document.getElementById('applySugBtn').addEventListener('click', function () {
+      var m = suggestMinutes(S.subjects, S.hours * 60);
+      S.subjects.forEach(function (s, i) { s.target = m[i]; });
+      save(); renderSubjects(); showToast('Targets updated to the suggested plan');
+    });
+
+    document.getElementById('resetDayBtn').addEventListener('click', function () {
+      if (!confirm("Reset all of today's study time?")) return;
+      S.running = null; S.logs[todayKey()] = {};
+      save(); renderSubjects(); renderChart(); showToast("Today's timers cleared");
+    });
+
+    document.getElementById('addForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('newName').value.trim();
+      var min = Math.max(5, Math.min(480, Math.round((+document.getElementById('newMin').value || 30) / 5) * 5));
+      if (!name) return;
+      S.subjects.push({ id: uid(), key: 'custom', name: name, icon: 'book-open', w: 1, conf: 2, target: min });
+      save(); renderSubjects(); document.getElementById('newName').value = '';
+      showToast(name + ' added');
+    });
+
+    /* ---------- Live tick (break reminders + display) ---------- */
+    setInterval(function () {
+      if (S.running && S.focus > 0) {
+        var el2 = nowSec() - S.running.start;
+        var rounds = Math.floor(el2 / (S.focus * 60));
+        if (rounds > (S.running.lastBreak || 0)) {
+          S.running.lastBreak = rounds; save();
+          showToast('Break time! You focused for ' + S.focus + ' minutes — rest for 5.');
+        }
+      }
+      updateLive();
+      if (S.running && Math.floor(nowSec()) % 15 === 0) renderChart();
+    }, 1000);
+
+    // if the page was closed with a timer running, it keeps counting from its start time
+    syncSetup(); renderTips(); renderSubjects(); renderChart();
+    if (S.running) showToast('Welcome back — your timer kept running.');
+  })();
+  </script>
+</body>
+</html>

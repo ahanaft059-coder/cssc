@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karotoya Collectorate Adarsha Siksha Niketan Science Club</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="aurora"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+  <header>
+    <div class="nav-content">
+      <a href="index.html" class="brand">
+        <div class="logo"><i class="fas fa-atom"></i></div>
+        <div class="brand-text"><b>Karotoya Collectorate</b><span>SCIENCE CLUB</span></div>
+      </a>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="rules.html">Rules</a></li>
+          <li><a href="students.html">Students</a></li>
+          <li><a href="performance.html">Performance</a></li>
+        </ul>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle theme"><i class="fas fa-circle-half-stroke"></i></button>
+        <button class="icon-btn menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><i class="fas fa-bars" id="menuIcon"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-panel" id="mobileNavPanel">
+    <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+    <a href="about.html" onclick="toggleMobileMenu()">About Institution</a>
+    <a href="rules.html" onclick="toggleMobileMenu()">Rules &amp; Regulations</a>
+    <a href="students.html" onclick="toggleMobileMenu()">Registered Students</a>
+    <a href="performance.html" onclick="toggleMobileMenu()">Performance &amp; Awards</a>
+  </nav>
+
+  <!-- HERO: club name + motto (original style) -->
+  <section class="hero-fullscreen" id="top">
+    <div class="hero-content">
+      <h2>Karotoya Collectorate Adarsha Siksha Niketan</h2>
+      <span class="sub-club-title">SCIENCE CLUB</span>
+      <p>Fostering scientific curiosity, experimentation, robotics, and innovation among young minds.</p>
+    </div>
+    <a href="#mainContent" class="scroll-indicator">
+      Scroll to Explore
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <main class="wrap" id="mainContent">
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat glass reveal"><div class="stat-ic"><i class="fas fa-users"></i></div><div><h3 id="statMembers" data-count="0">0</h3><p>Active Members</p></div></div>
+      <div class="stat glass reveal"><div class="stat-ic"><i class="fas fa-calendar-check"></i></div><div><h3 id="statEvents" data-count="0">0</h3><p>Upcoming Events</p></div></div>
+      <div class="stat glass reveal"><div class="stat-ic"><i class="fas fa-trophy"></i></div><div><h3 id="statAwards" data-count="0">0</h3><p>Awards &amp; Projects</p></div></div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="ticker glass reveal">
+      <span class="ticker-label">Latest</span>
+      <div class="ticker-track"><div class="ticker-move" id="tickerMove"></div></div>
+    </div>
+
+    <!-- NOTICES -->
+    <section class="block" id="notices">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><i class="fas fa-bullhorn"></i> Notice Board</span>
+        <h2>What's happening <span class="grad-text">right now</span></h2>
+        <p>Official updates from the club committee</p>
+      </div>
+      <div class="notice-wrap glass reveal">
+        <div class="notice-top">
+          <h3><i class="fas fa-thumbtack"></i> Official Notice Board</h3>
+          <span class="live">Live Updates</span>
+        </div>
+        <div class="notice-list" id="noticeList"></div>
+      </div>
+    </section>
+
+    <!-- STUDY PROMO -->
+    <section class="block">
+      <div class="promo glass reveal">
+        <div style="position:relative;z-index:1">
+          <span class="eyebrow"><i class="fas fa-wand-magic-sparkles"></i> New</span>
+          <h2>Your personal <span class="grad-text">Study Zone</span></h2>
+          <p>Pick your class and get a smart daily plan. Time every subject separately, change targets anytime, and let the Study Zone suggest what to study next.</p>
+          <ul>
+            <li><i class="fas fa-circle-check"></i> Class-wise subject plans (Class 3 – 10)</li>
+            <li><i class="fas fa-circle-check"></i> Separate timer for each subject</li>
+            <li><i class="fas fa-circle-check"></i> Smart suggestions &amp; weekly progress chart</li>
+          </ul>
+          <a href="study.html" class="btn btn-primary">Start Studying <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="mini-timer glass">
+          <div class="mini-ring"><div>1:42<small>Hours today</small></div></div>
+          <div class="mini-subs"><span>📐 Math</span><span>⚗️ Chemistry</span><span>🧬 Biology</span><span>📖 English</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMITTEE -->
+    <section class="block">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><i class="fas fa-people-group"></i> Our Team</span>
+        <h2>Club <span class="grad-text">Committee</span></h2>
+        <p>Meet our dedicated executive leaders and coordinators</p>
+      </div>
+      <div class="committee" id="committeeGrid"></div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="block">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><i class="fas fa-calendar-days"></i> Schedule</span>
+        <h2>Seminars &amp; <span class="grad-text">Events</span></h2>
+        <p>Club activities, dates and discussion topics</p>
+      </div>
+      <div class="schedule">
+        <div class="cal glass reveal">
+          <div class="cal-head">
+            <button class="icon-btn" onclick="changeMonth(-1)" aria-label="Previous month"><i class="fas fa-chevron-left"></i></button>
+            <h3 id="calTitle">Month</h3>
+            <button class="icon-btn" onclick="changeMonth(1)" aria-label="Next month"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="cal-grid">
+            <div class="cal-dn">Sun</div><div class="cal-dn">Mon</div><div class="cal-dn">Tue</div><div class="cal-dn">Wed</div><div class="cal-dn">Thu</div><div class="cal-dn">Fri</div><div class="cal-dn">Sat</div>
+          </div>
+          <div class="cal-grid" id="calDays" style="margin-top:6px"></div>
+        </div>
+        <div class="events glass reveal">
+          <h3><i class="fas fa-bullhorn"></i> Upcoming &amp; Recent</h3>
+          <div class="countdown" id="countdownBox" style="display:none"></div>
+          <div id="eventList" style="display:flex;flex-direction:column;gap:12px"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="block">
+      <div class="sec-head reveal">
+        <span class="eyebrow"><i class="fas fa-images"></i> Gallery</span>
+        <h2>Photo <span class="grad-text">Gallery</span></h2>
+        <p>Glimpses of our science fairs, workshops and lab experiments</p>
+      </div>
+      <div class="gallery">
+        <div class="shot glass reveal"><div class="shot-img"><i class="fas fa-atom"></i></div><div class="shot-info"><h4>Annual Science Fiesta</h4><p>Project display &amp; exhibition</p></div></div>
+        <div class="shot glass reveal"><div class="shot-img"><i class="fas fa-robot"></i></div><div class="shot-info"><h4>Robotics Workshop</h4><p>Hands-on circuit assembly</p></div></div>
+        <div class="shot glass reveal"><div class="shot-img"><i class="fas fa-graduation-cap"></i></div><div class="shot-info"><h4>Olympiad Winners</h4><p>Award reception ceremony</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <div>
+        <h3>Karotoya Collectorate Adarsha Siksha Niketan Science Club</h3>
+        <p>Empowering young minds through scientific research and innovation.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/groups/your-fb-group-id" target="_blank" rel="noopener" title="Facebook Group"><i class="fas fa-users"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61594144386733" target="_blank" rel="noopener" title="Facebook Page"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/kcasnsc?stkn=eTc3OHA0bjl0dmVk" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="rules.html">Rules &amp; Regulations</a></li>
+          <li><a href="students.html">Registered Students</a></li>
+          <li><a href="performance.html">Performance</a></li>
+          <li><a href="about.html">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact &amp; Community</h3>
+        <p>Karotoya Collectorate Adarsha Siksha Niketan, Panchagarh-5000, Rangpur, Bangladesh</p>
+        <p style="color:var(--primary);font-weight:700">Email: kcasnsc@gmail.com</p>
+      </div>
+    </div>
+    <div class="foot-bottom">&copy; 2026 Karotoya Collectorate Adarsha Siksha Niketan Science Club. All rights reserved.</div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    /* ===== EDIT YOUR CLUB DATA HERE ===== */
+    var CLUB = {
+      members: 45,
+      awards: 12,
+
+      // newest first
+      notices: [
+        { date: '2026-10-30', tag: 'Registration', text: 'Registration for the Science Quiz Competition starts today!' },
+        { date: '2026-10-15', tag: 'Contest', text: 'Meme Contest has officially started. Show your creativity!' },
+        { date: '2026-09-20', tag: 'Most important', text: 'Our first workshop will be held in school hall room with our committee and members.' },
+        { date: '2026-09-15', tag: 'Important', text: 'Member recruitment is now open! All interested members are requested to register their name.' },
+        { date: '2026-09-14', tag: 'First Seminar', text: 'Our introductory seminar will be held at 2:30 pm.' },
+        { date: '2026-09-10', tag: 'General', text: 'Member recruitment starts from class.' }
+      ],
+
+      events: [
+        { date: '2026-09-14', short: 'Seminar', title: 'Introductory Seminar', desc: 'Our introductory seminar at 2:30 pm.' },
+        { date: '2026-09-20', short: 'Workshop', title: 'First Workshop', desc: 'Held in the school hall room with committee and members.' },
+        { date: '2026-10-15', short: 'Meme', title: 'Meme Contest', desc: 'Showcase your creativity and fun side in our official meme contest.' },
+        { date: '2026-10-30', short: 'Quiz', title: 'Science Quiz Competition', desc: 'Registration starts today! Test and prove your science knowledge.' }
+      ],
+
+      committee: [
+        { name: 'Abdullah Al Saud', role: 'President', icon: 'user-tie', desc: 'Leading overall club operations and research initiatives.' },
+        { name: 'Ahanaf Abid Omlan', role: 'Vice President', icon: 'user-shield', desc: 'Managing daily activities, schedules, and communications.' },
+        { name: 'Anika Tasnim Oishi', role: 'Secretary', icon: 'pen-nib', desc: 'Keeping records and official club documents.' },
+        { name: 'Rafiul Islam', role: 'Assistant Secretary', icon: 'user-pen', desc: 'Supporting the secretary in all club paperwork.' },
+        { name: 'Raisa', role: 'Joint Secretary', icon: 'users-gear', desc: 'Coordinating between the secretary and members.' },
+        { name: 'Efty', role: 'Communication Head', icon: 'bullhorn', desc: 'Handling announcements and outreach.' },
+        { name: 'Jannatul Tajri Maliha', role: 'Coordinator', icon: 'list-check', desc: 'Organizing events, workshops and activities.' },
+        { name: 'Ratul Islam (Lam)', role: 'Treasurer', icon: 'coins', desc: 'Managing the club budget and funds.' },
+        { name: 'Hridhi', role: 'Science Secretary', icon: 'atom', desc: 'Leading experiments and science projects.' }
+      ]
+    };
+    /* ==================================== */
+
+    var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var SHORT_MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+    function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+    function parseD(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+    function ymd(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function nice(s) { var d = parseD(s); return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear(); }
+
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var view = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    function countUp(el, target) {
+      var start = null, dur = 1200;
+      function step(t) {
+        if (!start) start = t;
+        var p = Math.min((t - start) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function renderStats() {
+      var upcoming = CLUB.events.filter(function (e) { return parseD(e.date) >= today; }).length;
+      countUp(document.getElementById('statMembers'), CLUB.members);
+      countUp(document.getElementById('statEvents'), upcoming);
+      countUp(document.getElementById('statAwards'), CLUB.awards);
+    }
+
+    function renderNotices() {
+      var list = document.getElementById('noticeList');
+      list.innerHTML = CLUB.notices.map(function (n) {
+        var d = parseD(n.date);
+        return '<div class="notice"><div class="notice-date"><b>' + d.getDate() + '</b><small>' + SHORT_MONTHS[d.getMonth()] + '</small></div>' +
+          '<div class="notice-body"><span class="tag">' + esc(n.tag) + '</span><p>' + esc(n.text) + '</p></div></div>';
+      }).join('');
+
+      var items = CLUB.notices.slice(0, 4).map(function (n) { return '<span>' + esc(n.text) + '</span>'; }).join('');
+      document.getElementById('tickerMove').innerHTML = items + items;
+    }
+
+    function renderCommittee() {
+      document.getElementById('committeeGrid').innerHTML = CLUB.committee.map(function (m) {
+        return '<div class="member glass reveal"><div class="avatar"><i class="fas fa-' + m.icon + '"></i></div>' +
+          '<h4>' + esc(m.name) + '</h4><span class="role">' + esc(m.role) + '</span><p>' + esc(m.desc) + '</p></div>';
+      }).join('');
+      document.querySelectorAll('#committeeGrid .reveal').forEach(function (el, i) {
+        el.style.transitionDelay = (i % 3) * 90 + 'ms';
+        setTimeout(function () { el.classList.add('in'); }, 120 + i * 60);
+      });
+    }
+
+    function renderEvents() {
+      var sorted = CLUB.events.slice().sort(function (a, b) { return parseD(a.date) - parseD(b.date); });
+      var up = sorted.filter(function (e) { return parseD(e.date) >= today; });
+      var past = sorted.filter(function (e) { return parseD(e.date) < today; }).reverse();
+
+      var cd = document.getElementById('countdownBox');
+      if (up.length) {
+        var days = Math.round((parseD(up[0].date) - today) / 86400000);
+        cd.style.display = 'block';
+        cd.innerHTML = '<b>' + (days === 0 ? 'Today!' : days) + '</b><small>' + (days === 0 ? '' : (days === 1 ? 'day' : 'days') + ' to go · ') + esc(up[0].title) + '</small>';
+      }
+
+      function card(e, isPast) {
+        return '<div class="event' + (isPast ? ' past' : '') + '"><div class="d"><i class="far fa-clock"></i> ' + nice(e.date) + '</div>' +
+          '<h4>' + esc(e.title) + '</h4><p>' + esc(e.desc) + '</p></div>';
+      }
+      document.getElementById('eventList').innerHTML = up.map(function (e) { return card(e, false); }).join('') + past.map(function (e) { return card(e, true); }).join('');
+    }
+
+    function renderCalendar() {
+      var grid = document.getElementById('calDays');
+      var y = view.getFullYear(), m = view.getMonth();
+      document.getElementById('calTitle').textContent = MONTHS[m] + ' ' + y;
+      var first = new Date(y, m, 1).getDay();
+      var total = new Date(y, m + 1, 0).getDate();
+      var html = '';
+      for (var i = 0; i < first; i++) html += '<div class="cal-cell empty"></div>';
+      for (var d = 1; d <= total; d++) {
+        var key = y + '-' + String(m + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        var ev = CLUB.events.filter(function (e) { return e.date === key; })[0];
+        var cls = 'cal-cell' + (key === ymd(today) ? ' today' : '') + (ev ? ' has-ev' : '');
+        html += '<div class="' + cls + '"' + (ev ? ' title="' + esc(ev.title) + '"' : '') + '><span>' + d + '</span>' +
+          (ev ? '<span class="ev">' + esc(ev.short) + '</span>' : '') + '</div>';
+      }
+      grid.innerHTML = html;
+    }
+
+    function changeMonth(dir) {
+      view.setMonth(view.getMonth() + dir);
+      renderCalendar();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      renderStats();
+      renderNotices();
+      renderCommittee();
+      renderEvents();
+      renderCalendar();
+    });
+  </script>
+</body>
+</html>
