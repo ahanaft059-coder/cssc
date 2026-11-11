@@ -104,54 +104,53 @@
   <script src="app.js"></script>
   <script>
     /* ===== EDIT MEMBERS HERE (replace "—" with real class / section / roll) ===== */
-    var membersList = [
-      /* Committee members (club roll 101-109) */
-      { clubRoll: "101", name: "Abdullah Al Saud", class: "—", section: "—", classRoll: "—", role: "President" },
-      { clubRoll: "102", name: "Ahanaf Abid Omlan", class: "—", section: "—", classRoll: "—", role: "Vice President" },
-      { clubRoll: "103", name: "Anika Tasnim Oishi", class: "—", section: "—", classRoll: "—", role: "Secretary" },
-      { clubRoll: "104", name: "Rafiul Islam", class: "—", section: "—", classRoll: "—", role: "Assistant Secretary" },
-      { clubRoll: "105", name: "Raisa", class: "—", section: "—", classRoll: "—", role: "Joint Secretary" },
-      { clubRoll: "106", name: "Efty", class: "—", section: "—", classRoll: "—", role: "Communication Head" },
-      { clubRoll: "107", name: "Jannatul Tajri Maliha", class: "—", section: "—", classRoll: "—", role: "Coordinator" },
-      { clubRoll: "108", name: "Ratul Islam (Lam)", class: "—", section: "—", classRoll: "—", role: "Treasurer" },
-      { clubRoll: "109", name: "Hridhi", class: "—", section: "—", classRoll: "—", role: "Science Secretary" },
+   var membersList = [
+  /* Committee */
+  { clubRoll: "101", name: "Abdullah Al Saud", class: "—", section: "—", classRoll: "—", role: "President" },
+  { clubRoll: "102", name: "Ahanaf Abid Omlan", class: "—", section: "—", classRoll: "—", role: "Secretary" },
+  { clubRoll: "103", name: "Rafiul Islam", class: "—", section: "—", classRoll: "—", role: "Assistant Secretary" },
+  { clubRoll: "104", name: "Raisa", class: "—", section: "—", classRoll: "—", role: "Joint Secretary" },
+  { clubRoll: "105", name: "Efty", class: "—", section: "—", classRoll: "—", role: "Communication Head" },
+  { clubRoll: "106", name: "Jannatul Tajri Maliha", class: "—", section: "—", classRoll: "—", role: "Coordinator" },
+  { clubRoll: "107", name: "Ratul Islam (Lam)", class: "—", section: "—", classRoll: "—", role: "Treasurer" },
+  { clubRoll: "108", name: "Hridhi", class: "—", section: "—", classRoll: "—", role: "Science Secretary" },
 
-      /* General members (club roll 110 onwards) */
-      { clubRoll: "110", name: "Ridwan Prodhan", class: "Class 8", section: "Boys-2", classRoll: "01", role: "General Member" },
-      { clubRoll: "111", name: "Tasfia Jahan Nishi", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "112", name: "Abid Hasan", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "113", name: "Mahady Alam Babu", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "114", name: "Abu Sayed Adil", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "115", name: "Tomalika Roy", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "116", name: "Mustabshirah Ebtihaj Orni", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "117", name: "Ahanaf Hasan Riyan", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "118", name: "Nadia Mahjabin Bushra", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "119", name: "Al Monin", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "120", name: "Rita Moni", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  /* General members */
+  { clubRoll: "109", name: "Ridwan Prodhan", class: "Class 8", section: "Boys-2", classRoll: "01", role: "General Member" },
+  { clubRoll: "110", name: "Tasfia Jahan Nishi", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "111", name: "Abid Hasan", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "112", name: "Mahady Alam Babu", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "113", name: "Abu Sayed Adil", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "114", name: "Tomalika Roy", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "115", name: "Mustabshirah Ebtihaj Orni", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "116", name: "Ahanaf Hasan Riyan", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "117", name: "Nadia Mahjabin Bushra", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "118", name: "Al Monin", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "119", name: "Rita Moni", class: "—", section: "—", classRoll: "—", role: "General Member" },
 
-      /* Sample names (placeholders, club roll 121-140) - replace with real members */
-      { clubRoll: "121", name: "Sabbir Hossain", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "122", name: "Maliha Rahman", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "123", name: "Imran Khan", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "124", name: "Farzana Yasmin", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "125", name: "Tahsin Ahmed", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "126", name: "Sharmin Sultana", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "127", name: "Nayeem Uddin", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "128", name: "Jarin Tasnim", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "129", name: "Rafi Chowdhury", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "130", name: "Mim Akter", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "131", name: "Shakib Al Hasan", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "132", name: "Lamia Islam", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "133", name: "Zubayer Ahmed", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "134", name: "Anika Rahman", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "135", name: "Tamim Iqbal", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "136", name: "Sadiya Noor", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "137", name: "Fahad Hossain", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "138", name: "Nafisa Karim", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "139", name: "Arif Mahmud", class: "—", section: "—", classRoll: "—", role: "General Member" },
-      { clubRoll: "140", name: "Humayra Khanam", class: "—", section: "—", classRoll: "—", role: "General Member" }
-    ];
-    /* ============================= */
+  /* Sample names (placeholders) - replace with real members */
+  { clubRoll: "120", name: "Sabbir Hossain", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "121", name: "Maliha Rahman", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "122", name: "Imran Khan", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "123", name: "Farzana Yasmin", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "124", name: "Tahsin Ahmed", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "125", name: "Sharmin Sultana", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "126", name: "Nayeem Uddin", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "127", name: "Jarin Tasnim", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "128", name: "Rafi Chowdhury", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "129", name: "Mim Akter", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "130", name: "Shakib Al Hasan", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "131", name: "Lamia Islam", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "132", name: "Zubayer Ahmed", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "133", name: "Anika Rahman", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "134", name: "Tamim Iqbal", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "135", name: "Sadiya Noor", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "136", name: "Fahad Hossain", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "137", name: "Nafisa Karim", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "138", name: "Arif Mahmud", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "139", name: "Humayra Khanam", class: "—", section: "—", classRoll: "—", role: "General Member" },
+  { clubRoll: "140", name: "Anika Tasnim Oishi", class: "—", section: "—", classRoll: "—", role: "General Member" }
+];
 
     var PAGE = 24;          // cards shown at a time
     var shown = PAGE;
