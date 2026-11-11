@@ -131,31 +131,31 @@
   <script>
     /* ===== EDIT HERE ===== */
     var TOTAL_DAYS = 15;
-    var currentActiveDay = 5;   // days up to this number are shown as P / A, the rest as "Coming"
+    var currentActiveDay = 1;   // days up to this number are shown as P / A, the rest as "Coming"
 
     var clubStudentsData = [
       /* Committee: P = present, A = absent (edit the 5 marks per person) */
       { id: 1,  name: "Abdullah Al Saud",      role: "President",           attendance: ["P","P","P","P","P"] },
-      { id: 2,  name: "Ahanaf Abid Omlan",     role: "Vice President",      attendance: ["P","P","P","P","P"] },
-      { id: 3,  name: "Anika Tasnim Oishi",    role: "Secretary",           attendance: ["P","P","P","P","P"] },
-      { id: 4,  name: "Rafiul Islam",          role: "Assistant Secretary", attendance: ["P","P","P","P","P"] },
-      { id: 5,  name: "Raisa",                 role: "Joint Secretary",     attendance: ["P","P","P","P","P"] },
-      { id: 6,  name: "Efty",                  role: "Communication Head",  attendance: ["P","P","P","P","P"] },
-      { id: 7,  name: "Jannatul Tajri Maliha", role: "Coordinator",         attendance: ["P","P","P","P","P"] },
-      { id: 8,  name: "Ratul Islam (Lam)",     role: "Treasurer",           attendance: ["P","P","P","P","P"] },
-      { id: 9,  name: "Hridhi",                role: "Science Secretary",   attendance: ["P","P","P","P","P"] },
+      { id: 2,  name: "Ahanaf Abid Omlan",     role: "Secretary",           attendance: ["P","P","P","P","P"] },
+      { id: 3,  name: "Rafiul Islam",          role: "Assistant Secretary", attendance: ["P","P","P","P","P"] },
+      { id: 4,  name: "Raisa",                 role: "Joint Secretary",     attendance: ["A","P","P","P","P"] },
+      { id: 5,  name: "Efty",                  role: "Communication Head",  attendance: ["P","P","P","P","P"] },
+      { id: 6,  name: "Jannatul Tajri Maliha", role: "Coordinator",         attendance: ["P","P","P","P","P"] },
+      { id: 7,  name: "Ratul Islam (Lam)",     role: "Treasurer",           attendance: ["P","P","P","P","P"] },
+      { id: 8,  name: "Hridhi",                role: "Science Secretary",   attendance: ["A","P","P","P","P"] },
 
       /* General members */
-      { id: 10, name: "Ridwan Prodhan",             role: "General Member", attendance: ["P","P","A","P","P"] },
-      { id: 11, name: "Tasfia Jahan Nishi",         role: "General Member", attendance: ["P","P","P","P","A"] },
+      { id: 9,  name: "Anika Tasnim Oishi",    role: "Secretary",           attendance: ["P","P","P","P","P"] },
+      { id: 10, name: "Ridwan Prodhan",             role: "General Member", attendance: ["A","P","A","P","P"] },
+      { id: 11, name: "Tasfia Jahan Nishi",         role: "General Member", attendance: ["A","P","P","P","A"] },
       { id: 12, name: "Abid Hasan",                 role: "General Member", attendance: ["A","P","P","P","P"] },
-      { id: 13, name: "Mahady Alam Babu",           role: "General Member", attendance: ["P","A","P","P","P"] },
-      { id: 14, name: "Abu Sayed Adil",             role: "General Member", attendance: ["P","P","P","A","P"] },
+      { id: 13, name: "Mahady Alam Babu",           role: "General Member", attendance: ["A","A","P","P","P"] },
+      { id: 14, name: "Abu Sayed Adil",             role: "General Member", attendance: ["A","P","P","A","P"] },
       { id: 15, name: "Tomalika Roy",               role: "General Member", attendance: ["P","P","P","P","P"] },
       { id: 16, name: "Mustabshirah Ebtihaj Orni",  role: "General Member", attendance: ["P","A","P","P","P"] },
-      { id: 17, name: "Ahanaf Hasan Riyan",         role: "General Member", attendance: ["P","P","A","P","P"] },
+      { id: 17, name: "Ahanaf Hasan Riyan",         role: "General Member", attendance: ["A","P","A","P","P"] },
       { id: 18, name: "Nadia Mahjabin Bushra",      role: "General Member", attendance: ["A","P","P","P","A"] },
-      { id: 19, name: "Al Monin",                   role: "General Member", attendance: ["P","P","P","P","P"] },
+      { id: 19, name: "Al Monin",                   role: "General Member", attendance: ["A","P","P","P","P"] },
       { id: 20, name: "Rita Moni",                  role: "General Member", attendance: ["P","P","P","P","P"] },
       /* Sample names (placeholders) - replace with real members */
       { id: 21, name: "Sabbir Hossain", role: "General Member", attendance: ["P","P","P","A","P"] },
